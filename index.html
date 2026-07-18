@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>فيصل الشراري | مهندس حاسب وشبكات</title>
+  <title>فيصل الشراري | مهندس شبكات ومطور ألعاب</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
 
   <style>
     /* ==========================================
-       RESET
+       RESET & BASE (Cyber/Terminal Style)
     ========================================== */
     * {
       margin: 0;
@@ -23,539 +23,703 @@
     }
     body {
       direction: rtl;
-      font-family: 'Tajawal', sans-serif;
-      background: #050816;
-      color: #fff;
+      font-family: 'Cairo', 'Tajawal', sans-serif;
+      background: #090A0F;
+      color: #E0E6ED;
       overflow-x: hidden;
+      min-height: 100vh;
     }
 
     /* ==========================================
-       COLORS
+       CYBER GRID BACKGROUND (Canvas)
+    ========================================== */
+    #network-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    /* ==========================================
+       SCANLINE EFFECT (لمسة ألعاب قديمة)
+    ========================================== */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: repeating-linear-gradient(0deg,
+          rgba(0, 255, 200, 0.02) 0px,
+          rgba(0, 255, 200, 0.02) 2px,
+          transparent 2px,
+          transparent 6px);
+    }
+
+    /* ==========================================
+       VARIABLES (Neon)
     ========================================== */
     :root {
-      --primary: #2563EB;
-      --secondary: #06B6D4;
-      --bg: #050816;
-      --bg2: #0B1220;
-      --card: #111827;
-      --border: rgba(255,255,255,.08);
-      --text: #F8FAFC;
-      --text2: #94A3B8;
-    }
-
-    /* ==========================================
-       BACKGROUND
-    ========================================== */
-    .background {
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      background:
-        radial-gradient(circle at top right, #1d4ed833, transparent 35%),
-        radial-gradient(circle at bottom left, #06b6d422, transparent 35%),
-        #050816;
-    }
-    .background::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-    }
-
-    /* ==========================================
-       NAVBAR
-    ========================================== */
-    header {
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 999;
-      backdrop-filter: blur(18px);
-      background: rgba(5,8,22,.75);
-      border-bottom: 1px solid rgba(255,255,255,.05);
-    }
-    nav {
-      width: min(1300px, 92%);
-      margin: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 80px;
-    }
-    .logo {
-      font-size: 28px;
-      font-weight: 800;
-      color: white;
-      letter-spacing: 2px;
-    }
-    nav ul {
-      display: flex;
-      gap: 35px;
-      list-style: none;
-    }
-    nav a {
-      color: #cbd5e1;
-      text-decoration: none;
-      transition: .3s;
-      font-weight: 500;
-    }
-    nav a:hover {
-      color: white;
-    }
-
-    /* ==========================================
-       HERO
-    ========================================== */
-    .hero {
-      width: min(1300px, 92%);
-      margin: auto;
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 70px;
-      align-items: center;
-      padding-top: 90px;
-    }
-    .badge {
-      display: inline-block;
-      background: #1E3A8A;
-      color: white;
-      padding: 10px 22px;
-      border-radius: 999px;
-      margin-bottom: 30px;
-      font-size: 15px;
-    }
-    .hero h1 {
-      font-size: 74px;
-      line-height: 1.1;
-      margin-bottom: 20px;
-    }
-    .hero h2 {
-      color: #CBD5E1;
-      font-size: 28px;
-      margin-bottom: 25px;
-      font-weight: 500;
-    }
-    .hero p {
-      color: #94A3B8;
-      font-size: 19px;
-      line-height: 2;
-      max-width: 700px;
-    }
-    .buttons {
-      margin-top: 45px;
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    .buttons a {
-      padding: 18px 34px;
-      border-radius: 14px;
-      text-decoration: none;
-      transition: .35s;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .primary {
-      background: linear-gradient(135deg, #2563EB, #06B6D4);
-      color: white;
-    }
-    .buttons a:last-child {
-      border: 1px solid rgba(255,255,255,.08);
-      color: white;
-    }
-    .buttons a:hover {
-      transform: translateY(-5px);
-    }
-
-    /* ==========================================
-       GLASS CARD (STATS)
-    ========================================== */
-    .glass-card {
-      background: rgba(17,24,39,.75);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 28px;
-      backdrop-filter: blur(18px);
-      padding: 40px;
-      box-shadow: 0 25px 70px rgba(0,0,0,.35);
-    }
-    .glass-card h3 {
-      font-size: 30px;
-      margin-bottom: 35px;
-    }
-    .stat {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 0;
-      border-bottom: 1px solid rgba(255,255,255,.05);
-    }
-    .stat:last-child {
-      border: none;
-    }
-    .stat span {
-      font-size: 36px;
-      color: #3B82F6;
-      font-weight: 800;
-    }
-    .stat p {
-      color: #CBD5E1;
-      font-size: 17px;
-    }
-
-    /* ==========================================
-       SECTIONS
-    ========================================== */
-    section {
-      width: min(1300px, 92%);
-      margin: auto;
-      padding: 120px 0;
-    }
-    section h2 {
-      font-size: 48px;
-      margin-bottom: 25px;
-      position: relative;
-      display: inline-block;
-    }
-    section h2::after {
-      content: "";
-      position: absolute;
-      bottom: -12px;
-      right: 0;
-      width: 80px;
-      height: 4px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #2563EB, #06B6D4);
-    }
-
-    /* ==========================================
-       ABOUT
-    ========================================== */
-    #about p {
-      margin-top: 35px;
-      max-width: 900px;
-      line-height: 2.2;
-      font-size: 20px;
-      color: #B6C2D3;
-    }
-
-    /* ==========================================
-       CARDS (skills, projects, certificates)
-    ========================================== */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 28px;
-      margin-top: 55px;
-    }
-
-    /* ==========================================
-       SKILL CARD
-    ========================================== */
-    .skill {
-      background: #111827;
-      border: 1px solid rgba(255,255,255,.06);
-      border-radius: 24px;
-      padding: 35px;
-      transition: .35s;
-      position: relative;
-      overflow: hidden;
-    }
-    .skill::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 100%;
-      height: 5px;
-      background: linear-gradient(90deg, #2563EB, #06B6D4);
-    }
-    .skill:hover {
-      transform: translateY(-12px);
-      border-color: #2563EB;
-    }
-    .skill i {
-      font-size: 42px;
-      color: #3B82F6;
-      margin-bottom: 25px;
-    }
-    .skill h3 {
-      font-size: 28px;
-      margin-bottom: 20px;
-    }
-    .skill ul {
-      list-style: none;
-    }
-    .skill li {
-      padding: 12px 0;
-      color: #CBD5E1;
-      border-bottom: 1px solid rgba(255,255,255,.05);
-    }
-    .skill li:last-child {
-      border: none;
-    }
-
-    /* ==========================================
-       PROJECT CARD
-    ========================================== */
-    .project {
-      background: #111827;
-      border-radius: 25px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,.05);
-      transition: .35s;
-    }
-    .project:hover {
-      transform: translateY(-10px);
-    }
-    .project img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      background: #1E293B;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 60px;
-      color: #3B82F6;
-    }
-    .project-content {
-      padding: 28px;
-    }
-    .project-content h3 {
-      font-size: 30px;
-      margin-bottom: 15px;
-    }
-    .project-content p {
-      color: #A9B4C4;
-      line-height: 1.9;
-      margin-bottom: 20px;
-    }
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .project-tags span {
-      background: #1E293B;
-      color: #60A5FA;
-      padding: 8px 16px;
-      border-radius: 999px;
-      font-size: 14px;
-    }
-
-    /* ==========================================
-       CERTIFICATE CARD
-    ========================================== */
-    .certificate {
-      background: #111827;
-      border: 1px solid rgba(255,255,255,.06);
-      border-radius: 26px;
-      overflow: hidden;
-      transition: .35s;
-    }
-    .certificate:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 20px 50px rgba(0,0,0,.35);
-    }
-    .certificate .cert-icon {
-      width: 100%;
-      height: 160px;
-      background: #1E293B;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 80px;
-      color: #3B82F6;
-    }
-    .certificate-content {
-      padding: 28px;
-    }
-    .certificate-content h3 {
-      font-size: 25px;
-      margin-bottom: 14px;
-    }
-    .certificate-content p {
-      color: #94A3B8;
-      line-height: 1.8;
-      margin-bottom: 18px;
-    }
-    .certificate-content span {
-      display: inline-block;
-      background: #1E3A8A;
-      color: white;
-      padding: 8px 18px;
-      border-radius: 999px;
-      font-size: 14px;
-    }
-
-    /* ==========================================
-       TIMELINE (Experience)
-    ========================================== */
-    .timeline {
-      position: relative;
-      margin-top: 70px;
-      padding-right: 35px;
-    }
-    .timeline::before {
-      content: "";
-      position: absolute;
-      right: 8px;
-      top: 0;
-      width: 3px;
-      height: 100%;
-      background: linear-gradient(#2563EB, #06B6D4);
-    }
-    .timeline-item {
-      position: relative;
-      margin-bottom: 45px;
-      padding: 30px;
-      background: #111827;
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,.06);
-    }
-    .timeline-item::before {
-      content: "";
-      position: absolute;
-      right: -36px;
-      top: 35px;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: #3B82F6;
-      box-shadow: 0 0 0 5px rgba(59,130,246,.18);
-    }
-    .timeline-item h3 {
-      font-size: 28px;
-      margin-bottom: 10px;
-    }
-    .timeline-item h4 {
-      color: #60A5FA;
-      margin-bottom: 15px;
-    }
-    .timeline-item p {
-      color: #AAB7C7;
-      line-height: 2;
-    }
-
-    /* ==========================================
-       CONTACT
-    ========================================== */
-    .contact {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 30px;
-      margin-top: 60px;
-    }
-    .contact-card {
-      background: #111827;
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,.06);
-      padding: 35px;
-      transition: .3s;
-    }
-    .contact-card:hover {
-      transform: translateY(-6px);
-      border-color: #2563EB;
-    }
-    .contact-card i {
-      font-size: 40px;
-      color: #3B82F6;
-      margin-bottom: 20px;
-    }
-    .contact-card h3 {
-      margin-bottom: 15px;
-      font-size: 26px;
-    }
-    .contact-card p {
-      color: #AAB7C7;
-      line-height: 1.8;
-    }
-    .contact-card a {
-      color: #60A5FA;
-      text-decoration: none;
-    }
-    .contact-card a:hover {
-      text-decoration: underline;
-    }
-
-    /* ==========================================
-       FOOTER
-    ========================================== */
-    footer {
-      margin-top: 120px;
-      border-top: 1px solid rgba(255,255,255,.06);
-      padding: 40px 0;
-      text-align: center;
-      color: #94A3B8;
+      --neon-cyan: #00F0FF;
+      --neon-pink: #FF2D75;
+      --neon-orange: #FF9F1C;
+      --bg-deep: #090A0F;
+      --bg-card: #13161E;
+      --border-glow: rgba(0, 240, 255, 0.15);
+      --text-main: #E8EDF5;
+      --text-dim: #8B95A9;
     }
 
     /* ==========================================
        SCROLLBAR
     ========================================== */
     ::-webkit-scrollbar {
-      width: 10px;
+      width: 8px;
     }
     ::-webkit-scrollbar-track {
-      background: #050816;
+      background: #090A0F;
     }
     ::-webkit-scrollbar-thumb {
-      background: #2563EB;
-      border-radius: 999px;
+      background: var(--neon-cyan);
+      border-radius: 10px;
+      box-shadow: 0 0 15px var(--neon-cyan);
     }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #3B82F6;
+
+    /* ==========================================
+       HEADER (Cyber Nav)
+    ========================================== */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 999;
+      background: rgba(9, 10, 15, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-glow);
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.05);
+    }
+    nav {
+      width: min(1350px, 95%);
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+    }
+    .logo {
+      font-size: 26px;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 2px;
+      text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+    }
+    .logo span {
+      font-weight: 300;
+      color: var(--text-dim);
+      -webkit-text-fill-color: var(--text-dim);
+    }
+    nav ul {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+    nav a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: 0.3s;
+      position: relative;
+      padding: 5px 0;
+    }
+    nav a::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      right: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--neon-cyan);
+      box-shadow: 0 0 10px var(--neon-cyan);
+      transition: 0.3s;
+    }
+    nav a:hover {
+      color: #fff;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* ==========================================
+       HERO (Terminal & Stats)
+    ========================================== */
+    .hero {
+      position: relative;
+      z-index: 2;
+      width: min(1350px, 95%);
+      margin: auto;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 50px;
+      align-items: center;
+      padding-top: 100px;
+      padding-bottom: 40px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      padding: 8px 20px;
+      border-radius: 50px;
+      color: var(--neon-cyan);
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 25px;
+      letter-spacing: 1px;
+    }
+    .hero-badge i {
+      font-size: 12px;
+      color: var(--neon-pink);
+    }
+
+    .hero h1 {
+      font-size: 68px;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 15px;
+    }
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-orange));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .typing-wrapper {
+      height: 50px;
+      margin-bottom: 20px;
+    }
+    #typed-text {
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+      direction: ltr;
+      display: inline-block;
+    }
+    #typed-text::after {
+      content: "|";
+      animation: blink 0.8s infinite;
+      color: var(--neon-pink);
+    }
+    @keyframes blink {
+      0%,
+      100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .hero p {
+      color: var(--text-dim);
+      font-size: 18px;
+      line-height: 2;
+      max-width: 650px;
+      margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 14px 34px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid transparent;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--neon-cyan), #007BFF);
+      color: #090A0F;
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+    }
+    .btn-primary:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 50px rgba(0, 240, 255, 0.4);
+    }
+    .btn-outline {
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .btn-outline:hover {
+      border-color: var(--neon-cyan);
+      background: rgba(0, 240, 255, 0.05);
+      transform: translateY(-3px);
+    }
+
+    /* Hero Right Card (Dashboard Stats) */
+    .dashboard-card {
+      background: rgba(19, 22, 30, 0.7);
+      backdrop-filter: blur(15px);
+      border: 1px solid var(--border-glow);
+      border-radius: 20px;
+      padding: 35px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+    .dashboard-card h3 {
+      font-size: 22px;
+      margin-bottom: 25px;
+      color: var(--neon-cyan);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .dashboard-card h3 i {
+      font-size: 18px;
+      color: var(--neon-pink);
+    }
+    .stat-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .stat-item:last-child {
+      border: none;
+    }
+    .stat-value {
+      font-size: 34px;
+      font-weight: 900;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+    }
+    .stat-label {
+      color: var(--text-dim);
+      font-weight: 500;
+    }
+    .stat-label i {
+      margin-left: 10px;
+      color: var(--neon-orange);
+      width: 20px;
+    }
+
+    /* ==========================================
+       SECTIONS (Global)
+    ========================================== */
+    section {
+      position: relative;
+      z-index: 2;
+      width: min(1350px, 95%);
+      margin: auto;
+      padding: 100px 0;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 50px;
+    }
+    .section-header h2 {
+      font-size: 42px;
+      font-weight: 800;
+      position: relative;
+    }
+    .section-header h2::after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      right: 0;
+      width: 70px;
+      height: 4px;
+      border-radius: 10px;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+      box-shadow: 0 0 20px var(--neon-cyan);
+    }
+    .section-header .line-deco {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border-glow), transparent);
+    }
+
+    /* ==========================================
+       ABOUT
+    ========================================== */
+    #about p {
+      font-size: 19px;
+      line-height: 2.2;
+      color: #B8C4D6;
+      background: rgba(19, 22, 30, 0.4);
+      padding: 35px 40px;
+      border-radius: 20px;
+      border-right: 4px solid var(--neon-cyan);
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+    }
+
+    /* ==========================================
+       SKILLS (Server Rack Style)
+    ========================================== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+    .skill-rack {
+      background: rgba(19, 22, 30, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 30px;
+      transition: 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .skill-rack::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--neon-cyan);
+      box-shadow: 0 0 20px var(--neon-cyan);
+      opacity: 0;
+      transition: 0.3s;
+    }
+    .skill-rack:hover::before {
+      opacity: 1;
+    }
+    .skill-rack:hover {
+      transform: translateY(-8px);
+      border-color: var(--border-glow);
+      background: rgba(19, 22, 30, 0.9);
+    }
+
+    .skill-rack .led {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--neon-cyan);
+      box-shadow: 0 0 15px var(--neon-cyan);
+      margin-bottom: 15px;
+      animation: pulse-led 2s infinite;
+    }
+    @keyframes pulse-led {
+      0%,
+      100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.3;
+      }
+    }
+    .skill-rack h3 {
+      font-size: 22px;
+      margin-bottom: 18px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .skill-rack h3 i {
+      color: var(--neon-orange);
+    }
+    .skill-rack ul {
+      list-style: none;
+    }
+    .skill-rack li {
+      padding: 10px 0;
+      color: var(--text-dim);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .skill-rack li:last-child {
+      border: none;
+    }
+    .skill-rack li i {
+      color: var(--neon-cyan);
+      font-size: 14px;
+      width: 20px;
+    }
+
+    /* ==========================================
+       PROJECTS & CERTIFICATES
+    ========================================== */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .project-card,
+    .cert-card {
+      background: rgba(19, 22, 30, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: 0.3s;
+      backdrop-filter: blur(5px);
+    }
+    .project-card:hover,
+    .cert-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .project-icon-box,
+    .cert-icon-box {
+      height: 180px;
+      background: radial-gradient(circle at 20% 30%, #1A2332, #090A0F);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 65px;
+      color: var(--neon-cyan);
+      border-bottom: 1px solid var(--border-glow);
+    }
+    .project-content,
+    .cert-content {
+      padding: 25px;
+    }
+    .project-content h3,
+    .cert-content h3 {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+    .project-content p,
+    .cert-content p {
+      color: var(--text-dim);
+      line-height: 1.8;
+      margin-bottom: 18px;
+      font-size: 15px;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .tags span {
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.1);
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 13px;
+      color: var(--neon-cyan);
+      font-weight: 600;
+    }
+    .cert-date {
+      display: inline-block;
+      background: rgba(255, 45, 117, 0.1);
+      border: 1px solid rgba(255, 45, 117, 0.2);
+      padding: 6px 18px;
+      border-radius: 50px;
+      font-size: 14px;
+      color: var(--neon-pink);
+      font-weight: 700;
+    }
+
+    /* ==========================================
+       EXPERIENCE (Timeline)
+    ========================================== */
+    .timeline {
+      position: relative;
+      padding-right: 30px;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--neon-cyan), var(--neon-pink));
+      box-shadow: 0 0 20px var(--neon-cyan);
+    }
+    .tl-item {
+      position: relative;
+      margin-bottom: 40px;
+      padding: 25px 30px;
+      background: rgba(19, 22, 30, 0.4);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      transition: 0.3s;
+    }
+    .tl-item:hover {
+      background: rgba(19, 22, 30, 0.8);
+      border-color: var(--border-glow);
+    }
+    .tl-item::before {
+      content: "";
+      position: absolute;
+      right: -36px;
+      top: 30px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--neon-cyan);
+      box-shadow: 0 0 25px var(--neon-cyan);
+      border: 3px solid #090A0F;
+    }
+    .tl-item h3 {
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+    .tl-item .sub {
+      color: var(--neon-orange);
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .tl-item p {
+      color: var(--text-dim);
+      line-height: 1.9;
+    }
+
+    /* ==========================================
+       CONTACT (Terminal Grid)
+    ========================================== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+    }
+    .contact-block {
+      background: rgba(19, 22, 30, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 30px 20px;
+      text-align: center;
+      transition: 0.3s;
+    }
+    .contact-block:hover {
+      border-color: var(--neon-cyan);
+      transform: scale(1.02);
+      background: rgba(19, 22, 30, 0.9);
+    }
+    .contact-block i {
+      font-size: 40px;
+      color: var(--neon-cyan);
+      margin-bottom: 15px;
+      text-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+    }
+    .contact-block h4 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+    .contact-block a,
+    .contact-block p {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    .contact-block a:hover {
+      color: #fff;
+    }
+
+    /* ==========================================
+       FOOTER
+    ========================================== */
+    footer {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 30px 0;
+      border-top: 1px solid var(--border-glow);
+      color: var(--text-dim);
+      font-size: 14px;
+    }
+    footer strong {
+      color: var(--neon-cyan);
     }
 
     /* ==========================================
        RESPONSIVE
     ========================================== */
-    @media(max-width:1100px) {
+    @media(max-width:1050px) {
       .hero {
         grid-template-columns: 1fr;
         text-align: center;
+        padding-top: 120px;
       }
       .hero p {
         margin: auto;
       }
-      .buttons {
+      .hero-buttons {
         justify-content: center;
       }
-      .contact {
-        grid-template-columns: 1fr;
+      .typing-wrapper {
+        height: 40px;
+      }
+      #typed-text {
+        font-size: 22px;
+      }
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .section-header .line-deco {
+        display: none;
       }
     }
     @media(max-width:768px) {
       nav {
-        height: auto;
-        padding: 20px 0;
         flex-direction: column;
-        gap: 20px;
+        height: auto;
+        padding: 15px 0;
+        gap: 15px;
       }
       nav ul {
         flex-wrap: wrap;
         justify-content: center;
-        gap: 20px;
+        gap: 15px;
       }
       .hero h1 {
-        font-size: 48px;
+        font-size: 40px;
       }
-      .hero h2 {
-        font-size: 22px;
+      .hero h1 .highlight {
+        font-size: 40px;
       }
-      section h2 {
-        font-size: 36px;
+      #typed-text {
+        font-size: 18px;
       }
-      .cards {
-        grid-template-columns: 1fr;
+      .dashboard-card {
+        padding: 20px;
       }
-      .contact {
-        grid-template-columns: 1fr;
+      .stat-value {
+        font-size: 26px;
+      }
+      section {
+        padding: 60px 0;
+      }
+      .section-header h2 {
+        font-size: 30px;
+      }
+      #about p {
+        padding: 20px;
+        font-size: 16px;
       }
     }
   </style>
@@ -563,143 +727,156 @@
 
 <body>
 
-  <div class="background"></div>
+  <!-- ==========================================
+  NETWORK CANVAS (خلفية طوبولوجيا الشبكة)
+  ========================================== -->
+  <canvas id="network-canvas"></canvas>
 
-  <!-- ============================================
+  <!-- ==========================================
   HEADER
-  ============================================ -->
+  ========================================== -->
   <header>
     <nav>
-      <div class="logo">FIAISAL.</div>
+      <div class="logo">FIAISAL <span>//</span> ENGINEER</div>
       <ul>
         <li><a href="#home">الرئيسية</a></li>
         <li><a href="#about">نبذة</a></li>
         <li><a href="#skills">المهارات</a></li>
         <li><a href="#projects">المشاريع</a></li>
-        <li><a href="#certificates">الشهادات</a></li>
+        <li><a href="#certs">الشهادات</a></li>
         <li><a href="#experience">الخبرات</a></li>
         <li><a href="#contact">التواصل</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- ============================================
+  <!-- ==========================================
   HERO
-  ============================================ -->
+  ========================================== -->
   <section id="home" class="hero">
     <div class="hero-text">
-      <div class="badge">مهندس حاسب وشبكات</div>
-      <h1>فيصل مدالله الشراري</h1>
-      <h2>مطور ألعاب • مطور Unity • مطور VRChat • إدارة سيرفرات</h2>
+      <div class="hero-badge">
+        <i class="fas fa-circle"></i> ONLINE // READY FOR DEPLOY
+      </div>
+      <h1>
+        فيصل <span class="highlight">الشراري</span>
+      </h1>
+      <div class="typing-wrapper">
+        <span id="typed-text"></span>
+      </div>
       <p>
-        مهندس حاسب وشبكات متخصص في تطوير البرمجيات، البنية التحتية، الشبكات،
-        إدارة السيرفرات، وتطوير الألعاب والواقع الافتراضي باستخدام Unity.
+        مهندس حاسب وشبكات، ومطور ألعاب محترف. أدمج بين البنية التحتية للشبكات،
+        إدارة السيرفرات، وتطوير تجارب الواقع الافتراضي والألعاب باستخدام Unity.
+        مشروع التخرج: روبوت RFID ذكي من المحاكاة الافتراضية إلى النموذج المادي.
       </p>
-      <div class="buttons">
-        <a href="#" class="primary"><i class="fas fa-download"></i> تحميل السيرة الذاتية</a>
-        <a href="https://github.com/Faisal-cne" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-        <a href="https://linkedin.com/in/faisal-alsharari" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      <div class="hero-buttons">
+        <a href="#" class="btn btn-primary"><i class="fas fa-file-pdf"></i> تحميل السيرة الذاتية</a>
+        <a href="https://github.com/Faisal-cne" target="_blank" class="btn btn-outline"><i class="fab fa-github"></i> GitHub</a>
+        <a href="https://linkedin.com/in/faisal-alsharari" target="_blank" class="btn btn-outline"><i class="fab fa-linkedin"></i> LinkedIn</a>
       </div>
     </div>
     <div class="hero-image">
-      <div class="glass-card">
-        <h3>إحصائيات</h3>
-        <div class="stat">
-          <span>144K+</span>
-          <p>عدد اللاعبين</p>
+      <div class="dashboard-card">
+        <h3><i class="fas fa-server"></i> لوحة إحصائيات الأداء</h3>
+        <div class="stat-item">
+          <span class="stat-label"><i class="fas fa-users"></i> إجمالي اللاعبين</span>
+          <span class="stat-value">144K+</span>
         </div>
-        <div class="stat">
-          <span>600+</span>
-          <p>ساعة تطوع</p>
+        <div class="stat-item">
+          <span class="stat-label"><i class="fas fa-clock"></i> ساعات تطوعية</span>
+          <span class="stat-value">600+</span>
         </div>
-        <div class="stat">
-          <span>8</span>
-          <p>سنوات بالكشافة</p>
+        <div class="stat-item">
+          <span class="stat-label"><i class="fas fa-flag"></i> سنوات كشفية</span>
+          <span class="stat-value">8</span>
         </div>
-        <div class="stat">
-          <span>3</span>
-          <p>شهادات Cisco</p>
+        <div class="stat-item">
+          <span class="stat-label"><i class="fas fa-certificate"></i> شهادات Cisco</span>
+          <span class="stat-value">3</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============================================
+  <!-- ==========================================
   ABOUT
-  ============================================ -->
+  ========================================== -->
   <section id="about">
-    <h2>نبذة عني</h2>
+    <div class="section-header">
+      <h2>عنوان التعريف</h2>
+      <div class="line-deco"></div>
+    </div>
     <p>
-      خريج هندسة الحاسب والشبكات بجامعة الجوف، أمتلك خبرة عملية في إدارة السيرفرات
-      (Linux و Windows Server)، والبنية التحتية للشبكات، وتطوير التطبيقات الكاملة.
-      قمت بتطوير ونشر عدة ألعاب وتجارب واقع افتراضي باستخدام Unity و Blender.
-      مشروع التخرج كان عبارة عن روبوت ذكي متتبع للإنسان باستخدام تقنية RFID،
-      انتقل من محاكاة واقع افتراضي متكاملة إلى نموذج مادي يعمل بالتكامل بين البرمجيات والأجهزة.
-      أسعى لتطبيق مهاراتي في هندسة الشبكات، إدارة الأنظمة، أو البنية التحتية لتقنية المعلومات.
+      <i class="fas fa-terminal" style="color:var(--neon-cyan);margin-left:15px;"></i>
+      خريج هندسة الحاسب والشبكات بجامعة الجوف (2025)، أمتلك خبرة عملية في إدارة السيرفرات (Linux و Windows Server)،
+      البنية التحتية للشبكات، وتطوير التطبيقات الكاملة. قمت بتطوير ونشر عدة ألعاب وتجارب واقع افتراضي باستخدام Unity و Blender.
+      مشروع التخرج كان روبوتاً ذكياً متتبعاً للإنسان بتقنية RFID، انتقل من محاكاة واقع افتراضي متكاملة إلى نموذج مادي يعمل بالتكامل بين البرمجيات والأجهزة.
+      أسعى لتطبيق مهاراتي في هندسة الشبكات، إدارة الأنظمة، وتطوير الألعاب التفاعلية.
     </p>
   </section>
 
-  <!-- ============================================
+  <!-- ==========================================
   SKILLS
-  ============================================ -->
+  ========================================== -->
   <section id="skills">
-    <h2>المهارات التقنية</h2>
-    <div class="cards">
+    <div class="section-header">
+      <h2>الوحدات التقنية</h2>
+      <div class="line-deco"></div>
+    </div>
+    <div class="skills-grid">
 
-      <div class="skill">
-        <i class="fas fa-network-wired"></i>
-        <h3>الشبكات وإدارة السيرفرات</h3>
+      <div class="skill-rack">
+        <div class="led"></div>
+        <h3><i class="fas fa-network-wired"></i> البنية التحتية</h3>
         <ul>
-          <li>إدارة شبكات الحاسوب</li>
-          <li>Linux & Windows Server</li>
-          <li>أساسيات الأمن السيبراني</li>
-          <li>استكشاف الأعطال</li>
+          <li><i class="fas fa-check-circle"></i> إدارة شبكات الحاسوب</li>
+          <li><i class="fas fa-check-circle"></i> Linux & Windows Server</li>
+          <li><i class="fas fa-check-circle"></i> أساسيات الأمن السيبراني</li>
+          <li><i class="fas fa-check-circle"></i> استكشاف الأعطال وتحليلها</li>
         </ul>
       </div>
 
-      <div class="skill">
-        <i class="fas fa-code"></i>
-        <h3>البرمجة وقواعد البيانات</h3>
+      <div class="skill-rack">
+        <div class="led" style="background:var(--neon-pink);box-shadow:0 0 15px var(--neon-pink);"></div>
+        <h3><i class="fas fa-code"></i> البرمجة وقواعد البيانات</h3>
         <ul>
-          <li>C#, Python, JavaScript, C++</li>
-          <li>SQL – تصميم وإدارة قواعد البيانات</li>
-          <li>تطوير الويب (HTML, CSS, JS)</li>
-          <li>Unity & VR Development</li>
+          <li><i class="fas fa-check-circle"></i> C#, Python, JavaScript, C++</li>
+          <li><i class="fas fa-check-circle"></i> SQL (تصميم وإدارة)</li>
+          <li><i class="fas fa-check-circle"></i> تطوير الويب (HTML, CSS, JS)</li>
+          <li><i class="fas fa-check-circle"></i> Unity & VR Development</li>
         </ul>
       </div>
 
-      <div class="skill">
-        <i class="fas fa-gamepad"></i>
-        <h3>تطوير الألعاب والواقع الافتراضي</h3>
+      <div class="skill-rack">
+        <div class="led" style="background:var(--neon-orange);box-shadow:0 0 15px var(--neon-orange);"></div>
+        <h3><i class="fas fa-gamepad"></i> تطوير الألعاب والواقع الافتراضي</h3>
         <ul>
-          <li>Unity Engine</li>
-          <li>Blender (نمذجة ثلاثية الأبعاد)</li>
-          <li>تصميم تفاعلات لحظية (Real‑time)</li>
-          <li>نشر الألعاب وتجارب VR</li>
+          <li><i class="fas fa-check-circle"></i> Unity Engine (متقدم)</li>
+          <li><i class="fas fa-check-circle"></i> Blender (نمذجة ثلاثية الأبعاد)</li>
+          <li><i class="fas fa-check-circle"></i> تصميم تفاعلات لحظية (Real-time)</li>
+          <li><i class="fas fa-check-circle"></i> نشر الألعاب وتجارب VR</li>
         </ul>
       </div>
 
     </div>
   </section>
 
-  <!-- ============================================
+  <!-- ==========================================
   PROJECTS
-  ============================================ -->
+  ========================================== -->
   <section id="projects">
-    <h2>أبرز المشاريع</h2>
-    <div class="cards">
+    <div class="section-header">
+      <h2>المشاريع المنفذة</h2>
+      <div class="line-deco"></div>
+    </div>
+    <div class="grid-3">
 
-      <div class="project">
-        <div class="project-img" style="background:#1e293b;height:220px;display:flex;align-items:center;justify-content:center;font-size:60px;color:#3B82F6;">
-          <i class="fas fa-robot"></i>
-        </div>
+      <div class="project-card">
+        <div class="project-icon-box"><i class="fas fa-robot"></i></div>
         <div class="project-content">
           <h3>روبوت RFID متتبع للإنسان</h3>
-          <p>
-            مشروع التخرج: روبوت ذكي يستخدم تقنية RFID لتتبع المستخدم ومساعدته في حمل الأغراض.
-            تم بناء محاكاة كاملة بالواقع الافتراضي في Unity قبل تنفيذ النموذج المادي.
-          </p>
-          <div class="project-tags">
+          <p>مشروع التخرج: روبوت ذكي يستخدم تقنية RFID لتتبع المستخدم ومساعدته في حمل الأغراض. تم بناء محاكاة كاملة بالواقع الافتراضي في Unity قبل تنفيذ النموذج المادي.</p>
+          <div class="tags">
             <span>Unity</span>
             <span>RFID</span>
             <span>VR</span>
@@ -708,17 +885,12 @@
         </div>
       </div>
 
-      <div class="project">
-        <div class="project-img" style="background:#1e293b;height:220px;display:flex;align-items:center;justify-content:center;font-size:60px;color:#3B82F6;">
-          <i class="fas fa-vr-cardboard"></i>
-        </div>
+      <div class="project-card">
+        <div class="project-icon-box"><i class="fas fa-vr-cardboard"></i></div>
         <div class="project-content">
           <h3>ألعاب وتجارب VR مستقلة</h3>
-          <p>
-            تطوير ونشر ألعاب وتجارب واقع افتراضي باستخدام Unity و Blender،
-            تشمل دورات تطوير كاملة من التصميم إلى النشر على منصات متعددة.
-          </p>
-          <div class="project-tags">
+          <p>تطوير ونشر ألعاب وتجارب واقع افتراضي باستخدام Unity و Blender، شملت دورات تطوير كاملة من التصميم إلى النشر على منصات متعددة.</p>
+          <div class="tags">
             <span>Unity</span>
             <span>Blender</span>
             <span>C#</span>
@@ -727,17 +899,12 @@
         </div>
       </div>
 
-      <div class="project">
-        <div class="project-img" style="background:#1e293b;height:220px;display:flex;align-items:center;justify-content:center;font-size:60px;color:#3B82F6;">
-          <i class="fas fa-server"></i>
-        </div>
+      <div class="project-card">
+        <div class="project-icon-box"><i class="fas fa-server"></i></div>
         <div class="project-content">
           <h3>إدارة البنية التحتية والسيرفرات</h3>
-          <p>
-            إدارة بيئات Linux و Windows Server، تكوين النطاقات، استضافة الويب،
-            وإدارة قواعد البيانات مع مراقبة الأداء وضمان استمرارية الخدمة.
-          </p>
-          <div class="project-tags">
+          <p>إدارة بيئات Linux و Windows Server، تكوين النطاقات، استضافة الويب، وإدارة قواعد البيانات مع مراقبة الأداء وضمان استمرارية الخدمة.</p>
+          <div class="tags">
             <span>Linux</span>
             <span>Windows Server</span>
             <span>SQL</span>
@@ -749,138 +916,253 @@
     </div>
   </section>
 
-  <!-- ============================================
+  <!-- ==========================================
   CERTIFICATES
-  ============================================ -->
-  <section id="certificates">
-    <h2>الشهادات</h2>
-    <div class="cards">
+  ========================================== -->
+  <section id="certs">
+    <div class="section-header">
+      <h2>الشهادات الاحترافية</h2>
+      <div class="line-deco"></div>
+    </div>
+    <div class="grid-3">
 
-      <div class="certificate">
-        <div class="cert-icon"><i class="fas fa-certificate"></i></div>
-        <div class="certificate-content">
+      <div class="cert-card">
+        <div class="cert-icon-box"><i class="fas fa-certificate"></i></div>
+        <div class="cert-content">
           <h3>CCNA: Introduction to Networks</h3>
-          <p>Cisco – مقدمة في الشبكات</p>
-          <span>ديسمبر 2023</span>
+          <p>مقدمة في الشبكات من Cisco، تغطي أساسيات IPv4/IPv6، التوجيه، والتبديل.</p>
+          <span class="cert-date"><i class="far fa-calendar-alt"></i> ديسمبر 2023</span>
         </div>
       </div>
 
-      <div class="certificate">
-        <div class="cert-icon"><i class="fas fa-user-secret"></i></div>
-        <div class="certificate-content">
+      <div class="cert-card">
+        <div class="cert-icon-box"><i class="fas fa-user-secret"></i></div>
+        <div class="cert-content">
           <h3>Ethical Hacker</h3>
-          <p>Cisco – أساسيات الأمن السيبراني والاختراق الأخلاقي</p>
-          <span>مايو 2025</span>
+          <p>أساسيات الأمن السيبراني والاختراق الأخلاقي، تحليل الثغرات وحماية الأنظمة.</p>
+          <span class="cert-date"><i class="far fa-calendar-alt"></i> مايو 2025</span>
         </div>
       </div>
 
-      <div class="certificate">
-        <div class="cert-icon"><i class="fas fa-microchip"></i></div>
-        <div class="certificate-content">
+      <div class="cert-card">
+        <div class="cert-icon-box"><i class="fas fa-microchip"></i></div>
+        <div class="cert-content">
           <h3>Introduction to IoT</h3>
-          <p>Cisco – مقدمة في إنترنت الأشياء</p>
-          <span>يوليو 2026</span>
+          <p>مقدمة في إنترنت الأشياء، الربط بين الأجهزة الذكية وتحليل البيانات.</p>
+          <span class="cert-date"><i class="far fa-calendar-alt"></i> يوليو 2026</span>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- ============================================
+  <!-- ==========================================
   EXPERIENCE
-  ============================================ -->
+  ========================================== -->
   <section id="experience">
-    <h2>الخبرات</h2>
+    <div class="section-header">
+      <h2>سجل الخبرات</h2>
+      <div class="line-deco"></div>
+    </div>
     <div class="timeline">
 
-      <div class="timeline-item">
-        <h3>تطوير الألعاب والواقع الافتراضي</h3>
-        <h4>مشاريع مستقلة – مستمر</h4>
-        <p>
-          تطوير ونشر ألعاب وتجارب VR باستخدام Unity و Blender، تغطية دورة التطوير الكاملة
-          من التصميم إلى النشر، مع تطبيق مهارات C# والنمذجة ثلاثية الأبعاد والتفاعل اللحظي.
-        </p>
+      <div class="tl-item">
+        <h3>🎮 تطوير الألعاب والواقع الافتراضي</h3>
+        <span class="sub">مشاريع مستقلة • مستمر</span>
+        <p>تطوير ونشر ألعاب وتجارب VR باستخدام Unity و Blender، مع تطبيق مهارات C# والنمذجة ثلاثية الأبعاد والتفاعل اللحظي.</p>
       </div>
 
-      <div class="timeline-item">
-        <h3>إدارة السيرفرات والبنية التحتية</h3>
-        <h4>خبرة ذاتية – 1-3 سنوات</h4>
-        <p>
-          إدارة بيئات Linux و Windows Server، تكوين النطاقات، استضافة المواقع، وإدارة قواعد البيانات.
-          خبرة في مراقبة الأداء، التعامل مع بيانات المستخدمين، وضمان استمرارية الخدمة.
-        </p>
+      <div class="tl-item">
+        <h3>🖥️ إدارة السيرفرات والبنية التحتية</h3>
+        <span class="sub">خبرة ذاتية • 1-3 سنوات</span>
+        <p>إدارة بيئات Linux و Windows Server، تكوين النطاقات، استضافة المواقع، وإدارة قواعد البيانات مع مراقبة الأداء وضمان استمرارية الخدمة.</p>
       </div>
 
-      <div class="timeline-item">
-        <h3>العمل التطوعي</h3>
-        <h4>أكثر من 600 ساعة تطوعية</h4>
-        <p>
-          من خلال المنصة الوطنية للعمل التطوعي، مشاركة في العديد من المبادرات المجتمعية.
-        </p>
+      <div class="tl-item">
+        <h3>🤝 العمل التطوعي</h3>
+        <span class="sub">أكثر من 600 ساعة</span>
+        <p>مشاركة في العديد من المبادرات المجتمعية عبر المنصة الوطنية للعمل التطوعي، مع التركيز على المجالات التقنية والتعليمية.</p>
       </div>
 
-      <div class="timeline-item">
-        <h3>خدمة الحج – الكشافة السعودية</h3>
-        <h4>أكثر من 8 سنوات</h4>
-        <p>
-          عضو في جمعية الكشافة السعودية، مشاركة في تنظيم وتقديم خدمات الحج والعمرة.
-        </p>
+      <div class="tl-item">
+        <h3>🏕️ خدمة الحج – الكشافة السعودية</h3>
+        <span class="sub">أكثر من 8 سنوات</span>
+        <p>عضو نشط في جمعية الكشافة السعودية، مشاركة في تنظيم وتقديم خدمات الحج والعمرة، وتطوير مهارات القيادة والعمل الجماعي.</p>
       </div>
 
     </div>
   </section>
 
-  <!-- ============================================
+  <!-- ==========================================
   CONTACT
-  ============================================ -->
+  ========================================== -->
   <section id="contact">
-    <h2>التواصل</h2>
-    <div class="contact">
+    <div class="section-header">
+      <h2>قنوات الاتصال</h2>
+      <div class="line-deco"></div>
+    </div>
+    <div class="contact-grid">
 
-      <div class="contact-card">
+      <div class="contact-block">
         <i class="fas fa-phone-alt"></i>
-        <h3>الهاتف</h3>
-        <p><a href="tel:+966554447552">+966 55 444 7552</a></p>
+        <h4>جوال</h4>
+        <a href="tel:+966554447552">+966 55 444 7552</a>
       </div>
 
-      <div class="contact-card">
+      <div class="contact-block">
         <i class="fas fa-envelope"></i>
-        <h3>البريد الإلكتروني</h3>
-        <p><a href="mailto:enc.faisal@gmail.com">enc.faisal@gmail.com</a></p>
+        <h4>بريد إلكتروني</h4>
+        <a href="mailto:enc.faisal@gmail.com">enc.faisal@gmail.com</a>
       </div>
 
-      <div class="contact-card">
+      <div class="contact-block">
         <i class="fab fa-linkedin"></i>
-        <h3>LinkedIn</h3>
-        <p><a href="https://linkedin.com/in/faisal-alsharari" target="_blank">linkedin.com/in/faisal-alsharari</a></p>
+        <h4>LinkedIn</h4>
+        <a href="https://linkedin.com/in/faisal-alsharari" target="_blank">@faisal-alsharari</a>
       </div>
 
-      <div class="contact-card">
+      <div class="contact-block">
         <i class="fab fa-github"></i>
-        <h3>GitHub</h3>
-        <p><a href="https://github.com/Faisal-cne" target="_blank">github.com/Faisal-cne</a></p>
+        <h4>GitHub</h4>
+        <a href="https://github.com/Faisal-cne" target="_blank">@Faisal-cne</a>
       </div>
 
     </div>
   </section>
 
-  <!-- ============================================
+  <!-- ==========================================
   FOOTER
-  ============================================ -->
+  ========================================== -->
   <footer>
-    <p>© 2026 فيصل مدالله الشراري – جميع الحقوق محفوظة</p>
+    <p>© 2026 <strong>فيصل مدالله الشراري</strong> — مهندس شبكات ومطور ألعاب  //  <i class="fas fa-shield-alt" style="color:var(--neon-cyan);"></i>  نظام تشغيل البطاقة الشخصية v2.0</p>
   </footer>
 
-  <!-- ============================================
-  JavaScript (اختياري – تحسينات بسيطة)
-  ============================================ -->
+  <!-- ==========================================
+  SCRIPTS (Typewriter + Network Canvas)
+  ========================================== -->
   <script>
-    // عند الضغط على زر تحميل السيرة الذاتية
-    document.querySelector('.buttons .primary')?.addEventListener('click', function(e) {
+    // ==========================================
+    // 1. TYPEWRITER EFFECT
+    // ==========================================
+    const roles = [
+      'Computer & Network Engineer',
+      'Unity Game Developer',
+      'VR & Metaverse Developer',
+      'Systems Administrator'
+    ];
+    let roleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typedElement = document.getElementById('typed-text');
+
+    function typeEffect() {
+      const currentRole = roles[roleIndex];
+      if (isDeleting) {
+        typedElement.textContent = currentRole.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typedElement.textContent = currentRole.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      if (!isDeleting && charIndex === currentRole.length) {
+        setTimeout(() => { isDeleting = true; }, 2000);
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+      }
+      setTimeout(typeEffect, isDeleting ? 40 : 80);
+    }
+    typeEffect();
+
+    // ==========================================
+    // 2. NETWORK TOPOLOGY CANVAS
+    // ==========================================
+    const canvas = document.getElementById('network-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let nodes = [];
+    const NUM_NODES = 50;
+    const CONNECTION_DIST = 150;
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Node {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.radius = 2 + Math.random() * 3;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+      }
+    }
+
+    for (let i = 0; i < NUM_NODES; i++) {
+      nodes.push(new Node());
+    }
+
+    function drawNetwork() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Update positions
+      nodes.forEach(node => node.update());
+
+      // Draw connections
+      ctx.strokeStyle = 'rgba(0, 240, 255, 0.12)';
+      ctx.lineWidth = 1;
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < CONNECTION_DIST) {
+            const opacity = 1 - (dist / CONNECTION_DIST);
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.strokeStyle = `rgba(0, 240, 255, ${opacity * 0.25})`;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw nodes
+      nodes.forEach(node => {
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+        ctx.fillStyle = '#00F0FF';
+        ctx.shadowColor = '#00F0FF';
+        ctx.shadowBlur = 12;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        // Glow core
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, node.radius * 0.4, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+      });
+
+      requestAnimationFrame(drawNetwork);
+    }
+    drawNetwork();
+
+    // ==========================================
+    // 3. CV DOWNLOAD PLACEHOLDER
+    // ==========================================
+    document.querySelector('.btn-primary')?.addEventListener('click', function(e) {
       e.preventDefault();
-      alert('سيتم تحميل السيرة الذاتية قريباً. يمكنك الآن تحميل الملف cv-english.pdf من المستودع.');
-      // يمكنك استبدال الرابط الفعلي لملف PDF
-      // window.location.href = 'cv-english.pdf';
+      alert('سيتم تحميل ملف السيرة الذاتية (cv-english.pdf) فور رفعه على المستودع.');
     });
   </script>
 
