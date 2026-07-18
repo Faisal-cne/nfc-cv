@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فيصل الشراري — مهندس حاسب وشبكات</title>
+<meta name="description" content="فيصل الشراري، مهندس حاسب وشبكات. السيرة الذاتية، المشاريع، الشهادات، وطرق التواصل.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0A0A0F;
+    --card: #14141f;
+    --card-alt: #0d0d14;
+    --line: rgba(255,255,255,0.09);
+    --violet: #7C3AED;
+    --pink: #EC4899;
+    --cyan: #22D3EE;
+    --coral: #FF6B4A;
+    --text: #F5F5FA;
+    --muted: #8B8BA3;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Cairo', sans-serif;
+    line-height: 1.75;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  .mono{ font-family: 'JetBrains Mono', monospace; }
+  a{ color: var(--cyan); text-decoration: none; }
+  a:hover{ text-decoration: underline; }
+  a:focus-visible, button:focus-visible{ outline: 2px solid var(--coral); outline-offset: 3px; }
+
+  .glow{ position: absolute; border-radius: 50%; filter: blur(90px); pointer-events: none; z-index: 0; }
+  .glow-1{ width: 380px; height: 380px; background: radial-gradient(circle, rgba(124,58,237,0.25), transparent 70%); top: -100px; right: -100px; }
+  .glow-2{ width: 420px; height: 420px; background: radial-gradient(circle, rgba(34,211,238,0.18), transparent 70%); top: 500px; left: -140px; }
+  .glow-3{ width: 340px; height: 340px; background: radial-gradient(circle, rgba(236,72,153,0.15), transparent 70%); bottom: -60px; right: -60px; }
+
+  nav, header, main, footer{ position: relative; z-index: 1; }
+
+  .wrap{ max-width: 720px; margin: 0 auto; padding: 0 20px; }
+
+  /* ---------- NAV ---------- */
+  nav.topnav{
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav.topnav .wrap{ display:flex; align-items:center; justify-content:space-between; padding: 12px 20px; }
+  .brand-tag{ font-size: 11px; letter-spacing: 1.5px; color: var(--coral); font-weight:600; }
+  .nav-links{ display:flex; gap:16px; font-size:13px; color: var(--muted); overflow-x:auto; }
+  .nav-links a{ color: var(--muted); white-space:nowrap; }
+  .nav-links a:hover{ color: var(--cyan); text-decoration:none; }
+
+  /* ---------- HERO / ID CARD ---------- */
+  header.hero{ padding: 44px 0 20px; }
+
+  .id-card{
+    position: relative;
+    background: linear-gradient(160deg, var(--card), var(--card-alt));
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 34px 26px 26px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+    transform-style: preserve-3d;
+    will-change: transform;
+    overflow: hidden;
+  }
+  .id-card::before{
+    content:"";
+    position:absolute; inset: -2px;
+    background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,0.06) 50%, transparent 60%);
+    pointer-events:none;
+  }
+  .punch-hole{
+    width: 34px; height: 10px;
+    background: var(--bg);
+    border-radius: 20px;
+    margin: 0 auto 22px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.6);
+  }
+
+  .eyebrow{ font-size: 11.5px; letter-spacing: 2px; color: var(--coral); margin-bottom: 14px; font-weight: 600; }
+  h1{
+    font-size: clamp(30px, 8vw, 42px);
+    font-weight: 800;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+  .subtitle{ color: var(--cyan); font-size: 14.5px; font-weight: 600; margin-bottom: 6px; }
+  .location{ color: var(--muted); font-size: 13px; margin-bottom: 22px; }
+
+  .holo-strip{
+    height: 9px;
+    border-radius: 6px;
+    margin: 0 auto 22px;
+    max-width: 320px;
+    background: linear-gradient(90deg, var(--violet), var(--pink), var(--cyan), var(--violet));
+    background-size: 300% 100%;
+    animation: holo-shift 5s linear infinite;
+  }
+  @keyframes holo-shift{ from{ background-position: 0% 50%; } to{ background-position: 300% 50%; } }
+
+  .quick-actions{ display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom: 20px; }
+  .qa-pill{
+    display:flex; align-items:center; gap:7px;
+    font-size: 12.5px; font-family:'JetBrains Mono', monospace;
+    color: var(--text);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--line);
+    padding: 9px 14px;
+    border-radius: 30px;
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  }
+  .qa-pill:hover{ border-color: var(--cyan); background: rgba(34,211,238,0.08); transform: translateY(-2px); text-decoration:none; }
+  .qa-pill svg{ width:14px; height:14px; flex-shrink:0; }
+
+  .barcode-row{ display:flex; justify-content:center; align-items:flex-end; gap:2px; height: 26px; opacity: 0.5; margin-bottom: 8px; }
+  .barcode-row span{ width:2px; background: var(--muted); display:block; }
+  .scan-label{ font-size: 10px; letter-spacing: 3px; color: var(--muted); font-family:'JetBrains Mono', monospace; }
+
+  @media (prefers-reduced-motion: reduce){
+    .holo-strip{ animation: none; }
+  }
+
+  /* ---------- TICKET PANELS ---------- */
+  .panel{
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--line);
+    padding: 34px 24px 28px;
+    margin: 30px 0;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .panel.visible{ opacity: 1; transform: translateY(0); }
+
+  .panel::before, .panel::after{
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 16px;
+    background-image: radial-gradient(circle, var(--bg) 8px, transparent 8.5px);
+    background-size: 26px 16px;
+    background-repeat: repeat-x;
+    background-position: center;
+  }
+  .panel::before{ top: -8px; }
+  .panel::after{ bottom: -8px; }
+
+  .panel-id{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--coral);
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+    padding: 3px 12px;
+    border: 1px solid rgba(255,107,74,0.35);
+    background: rgba(255,107,74,0.08);
+    border-radius: 20px;
+  }
+  .panel h2{ font-size: 20px; margin-bottom: 18px; font-weight: 700; }
+  .panel p{ color: #D3D3E0; font-size: 14.5px; }
+  .panel p + p{ margin-top: 10px; }
+
+  /* competencies */
+  .comp-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; margin-top: 16px; }
+  .comp-item{ font-size: 13px; color: var(--text); padding-inline-start: 14px; position: relative; }
+  .comp-item::before{ content:""; position:absolute; inset-inline-start:0; top:8px; width:6px; height:6px; background: var(--cyan); border-radius:50%; }
+
+  /* project steps */
+  .steps{ margin-top: 16px; display:flex; flex-direction:column; gap: 16px; }
+  .step{ display:flex; gap: 14px; align-items:flex-start; }
+  .step-num{
+    font-family:'JetBrains Mono', monospace; font-size: 12px; color: var(--bg);
+    background: linear-gradient(135deg, var(--violet), var(--cyan));
+    min-width: 26px; height: 26px; border-radius: 50%;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0; font-weight:600;
+  }
+  .step-body h3{ font-size: 14.5px; margin-bottom: 3px; }
+  .step-body p{ font-size: 13.5px; color: var(--muted); }
+
+  /* experience */
+  .exp-block{ margin-top: 20px; padding-top: 20px; border-top: 1px dashed var(--line); }
+  .exp-block:first-of-type{ margin-top:0; padding-top:0; border-top:none; }
+  .exp-head{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; flex-wrap:wrap; }
+  .exp-head h3{ font-size: 15px; }
+  .exp-tag{ font-family:'JetBrains Mono', monospace; font-size:11px; color: var(--muted); }
+
+  .games-mini{ margin-top:14px; display:flex; flex-direction:column; gap:8px; }
+  .games-mini a{ display:flex; justify-content:space-between; gap:10px; font-size:13.5px; color: var(--text); border-bottom: 1px solid var(--line); padding-bottom:6px; }
+  .games-mini a .count{ color: var(--muted); font-family:'JetBrains Mono', monospace; font-size:12px; flex-shrink:0; }
+  .games-mini a:hover{ color: var(--cyan); text-decoration:none; }
+  .games-note{ margin-top:10px; font-size:12.5px; color: var(--muted); }
+
+  .vol-stats{ display:flex; gap:24px; margin-top:14px; flex-wrap:wrap; }
+  .vol-stat b{ display:block; font-size:20px; color: var(--coral); font-family:'JetBrains Mono', monospace; }
+  .vol-stat span{ font-size:12px; color: var(--muted); }
+
+  /* education */
+  .edu-degree h3{ font-size: 15.5px; }
+  .edu-degree .cert-meta{ font-size:13px; color: var(--muted); margin-top:4px; }
+
+  /* certificates as stamps */
+  .cert-item{ display:flex; gap:18px; align-items:center; margin-top:22px; }
+  .cert-item:first-child{ margin-top:0; }
+  .stamp{
+    width: 78px; height: 78px; flex-shrink:0;
+    border-radius: 50%;
+    border: 3px double var(--coral);
+    overflow: hidden;
+    display:flex; align-items:center; justify-content:center;
+    background: var(--card-alt);
+    box-shadow: 0 0 0 3px rgba(255,107,74,0.08);
+  }
+  .stamp img{ width:100%; height:100%; object-fit:cover; opacity: 0.92; }
+  .stamp.text-only{ font-family:'JetBrains Mono', monospace; font-size:11px; color: var(--coral); font-weight:600; text-align:center; letter-spacing:0.5px; }
+  .cert-item:nth-child(1) .stamp{ transform: rotate(-6deg); }
+  .cert-item:nth-child(2) .stamp{ transform: rotate(5deg); }
+  .cert-item:nth-child(3) .stamp{ transform: rotate(-4deg); }
+  .cert-info h3{ font-size:14.5px; }
+  .cert-info .cert-meta{ font-size:12px; color: var(--muted); margin-top:2px; }
+  .cert-info a{ font-size:12.5px; }
+
+  /* contact */
+  .contact-grid{ display:flex; flex-direction:column; gap:10px; margin-top:16px; }
+  .contact-row{ display:flex; justify-content:space-between; align-items:center; font-size:14px; border-bottom:1px solid var(--line); padding-bottom:8px; }
+  .contact-row .label{ color: var(--muted); font-size:12px; font-family:'JetBrains Mono', monospace; }
+
+  .cv-downloads{ display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; }
+  .btn{
+    font-family:'JetBrains Mono', monospace; font-size:12.5px; color: var(--bg);
+    background: linear-gradient(120deg, var(--cyan), var(--violet));
+    border:none; padding: 11px 18px; border-radius: 30px; cursor:pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 6px 18px rgba(124,58,237,0.3);
+    font-weight:600;
+  }
+  .btn:hover{ transform: translateY(-2px); box-shadow: 0 8px 22px rgba(34,211,238,0.35); text-decoration:none; }
+
+  .socials{ display:flex; gap:14px; margin-top:20px; }
+  .socials a{
+    width:38px; height:38px; border:1px solid var(--line); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; color: var(--muted);
+    transition: transform 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  .socials a:hover{ color: var(--cyan); border-color: var(--cyan); text-decoration:none; transform: translateY(-2px); }
+
+  footer{ text-align:center; padding: 34px 0 46px; font-size:11px; color: var(--muted); font-family:'JetBrains Mono', monospace; letter-spacing: 0.5px; }
+
+  @media (max-width: 420px){
+    .comp-grid{ grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+<div class="glow glow-3"></div>
+
+<nav class="topnav">
+  <div class="wrap">
+    <span class="brand-tag mono">F.ALSHARARI</span>
+    <div class="nav-links">
+      <a href="#cv">السيرة</a>
+      <a href="#project">المشروع</a>
+      <a href="#experience">الخبرات</a>
+      <a href="#certs">الشهادات</a>
+      <a href="#contact">تواصل</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="id-card" id="idcard">
+      <div class="punch-hole"></div>
+      <div class="eyebrow mono">ACCESS PASS // ID FA-2025-NET</div>
+      <h1>فيصل الشراري</h1>
+      <p class="subtitle">مهندس حاسب وشبكات</p>
+      <p class="location">الرياض، المملكة العربية السعودية</p>
+
+      <div class="holo-strip" aria-hidden="true"></div>
+
+      <div class="quick-actions">
+        <a class="qa-pill" href="tel:+966554447552">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.7 3.6 4.9 6.3 6.3l2.1-2.1c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.1 21 3 13.9 3 5c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1L6.6 10.8z"/></svg>
+          اتصال
+        </a>
+        <a class="qa-pill" href="https://wa.me/966554447552" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5s-.7-1.7-1-2.3c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1.1 2.8 1.2 3c.1.2 2.2 3.4 5.3 4.7.7.3 1.3.5 1.8.7.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.1-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.3c1.4.8 3.1 1.2 4.8 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.1.8.8-3-.2-.3C4 14.9 3.6 13.5 3.6 12c0-4.6 3.8-8.4 8.4-8.4s8.4 3.8 8.4 8.4-3.8 8.2-8.4 8.2z"/></svg>
+          واتساب
+        </a>
+        <a class="qa-pill" href="mailto:enc.faisal@gmail.com">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 4h20v16H2V4zm2 2v.01L12 13l8-6.99V6H4zm16 12V8.24l-8 7-8-7V18h16z"/></svg>
+          إيميل
+        </a>
+      </div>
+
+      <div class="barcode-row" aria-hidden="true">
+        <span style="height:100%"></span><span style="height:60%"></span><span style="height:90%"></span><span style="height:40%"></span><span style="height:100%"></span><span style="height:70%"></span><span style="height:50%"></span><span style="height:100%"></span><span style="height:30%"></span><span style="height:85%"></span><span style="height:60%"></span><span style="height:100%"></span><span style="height:45%"></span><span style="height:95%"></span><span style="height:55%"></span><span style="height:100%"></span><span style="height:65%"></span><span style="height:40%"></span><span style="height:90%"></span><span style="height:50%"></span>
+      </div>
+      <div class="scan-label">TAP TO CONNECT</div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="panel" id="cv">
+    <div class="panel-id mono">01 — نبذة</div>
+    <h2>السيرة الذاتية</h2>
+    <p>
+      خريج هندسة حاسب وشبكات، بخبرة عملية في إدارة السيرفرات، البنية التحتية للشبكات، وتطوير التطبيقات المتكاملة.
+      أتقن بيئتي Linux وWindows Server، إدارة النطاقات والاستضافة، وإدارة قواعد البيانات.
+      طوّرت ونشرت عدة ألعاب وتجارب واقع افتراضي باستخدام Unity وBlender.
+    </p>
+    <p>
+      مشروع تخرجي كان روبوتاً ذكياً لتتبع الإنسان يعتمد على تقنية RFID، بدأت بمحاكاة كاملة في الواقع الافتراضي
+      قبل تحويله إلى نظام فعلي متكامل بين العتاد والبرمجيات.
+    </p>
+
+    <div class="comp-grid">
+      <div class="comp-item">إدارة الشبكات</div>
+      <div class="comp-item">إدارة السيرفرات (Linux وWindows Server)</div>
+      <div class="comp-item">إدارة النطاقات والاستضافة</div>
+      <div class="comp-item">تطوير الواقع الافتراضي والألعاب</div>
+      <div class="comp-item">تصميم وإدارة قواعد البيانات</div>
+      <div class="comp-item">C#‎, Python, SQL, JavaScript, C++</div>
+      <div class="comp-item">حل المشكلات التقنية</div>
+      <div class="comp-item">تطوير مواقع الويب</div>
+      <div class="comp-item">أساسيات الشبكات والأمن السيبراني</div>
+    </div>
+  </section>
+
+  <section class="panel" id="project">
+    <div class="panel-id mono">02 — مشروع التخرج</div>
+    <h2>روبوت ذكي لتتبع الإنسان بتقنية RFID</h2>
+    <p>نظام يتتبع المستخدم الذي يحمل بطاقة RFID ويرافقه تلقائياً للمساعدة في حمل الأغراض. تطور المشروع على ثلاث مراحل:</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num mono">1</div>
+        <div class="step-body">
+          <h3>التصميم والمحاكاة</h3>
+          <p>بناء محاكاة كاملة للنظام داخل بيئة واقع افتراضي في Unity، لاختبار منطق التتبع وتفاعل المستخدم قبل أي تنفيذ فعلي.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num mono">2</div>
+        <div class="step-body">
+          <h3>التحقق من التصميم</h3>
+          <p>اختبار سلوك التتبع ومنطق التفاعل داخل المحاكاة، وتعديل التصميم بناءً على النتائج قبل الانتقال للعتاد.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num mono">3</div>
+        <div class="step-body">
+          <h3>الدمج مع العتاد</h3>
+          <p>تحويل المحاكاة إلى نموذج فعلي، ودمج قارئ RFID مع نظام التتبع اللحظي في روبوت حقيقي.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="experience">
+    <div class="panel-id mono">03 — الخبرة</div>
+    <h2>الخبرات والأنشطة</h2>
+
+    <div class="exp-block">
+      <div class="exp-head">
+        <h3>إدارة السيرفرات والبنية التحتية</h3>
+        <span class="exp-tag">1–3 سنوات</span>
+      </div>
+      <p>إدارة بيئات Linux وWindows Server، تهيئة النطاقات، استضافة المواقع، وإدارة قواعد البيانات. خبرة عملية في مراقبة الأداء واستمرارية التشغيل وإدارة بيانات المستخدمين.</p>
+    </div>
+
+    <div class="exp-block">
+      <div class="exp-head">
+        <h3>تطوير الألعاب والواقع الافتراضي</h3>
+        <span class="exp-tag">مستمر</span>
+      </div>
+      <p>تطوير ونشر ألعاب وتجارب واقع افتراضي عبر Unity وBlender، ضمن استوديو Sanji Studio الذي أسسته، بأكثر من 144,000 لاعب مجتمعين على عدة عوالم منشورة.</p>
+      <div class="games-mini">
+        <a href="https://github.com/Faisal-cne/guess-who-vrchat" target="_blank" rel="noopener">
+          <span>Guess Who? — لعبة تخمين ثنائية</span>
+          <span class="count mono">115,206</span>
+        </a>
+        <a href="https://github.com/Faisal-cne/bomb-tag-vrchat" target="_blank" rel="noopener">
+          <span>BOMB TAG — لعبة جماعية</span>
+          <span class="count mono">11,651</span>
+        </a>
+        <a href="https://github.com/Faisal-cne/Harof-azize" target="_blank" rel="noopener">
+          <span>حروف مع عزيز — لعبة تحدي عربية</span>
+          <span class="count mono">15,393</span>
+        </a>
+      </div>
+      <p class="games-note">لمزيد من المشاريع ومتجر الأنظمة الجاهزة: <a href="https://github.com/Faisal-cne" target="_blank" rel="noopener">GitHub</a></p>
+    </div>
+
+    <div class="exp-block">
+      <div class="exp-head"><h3>التطوع</h3></div>
+      <div class="vol-stats">
+        <div class="vol-stat">
+          <b class="mono">+600</b>
+          <span>ساعة تطوع عبر المنصة الوطنية للعمل التطوعي</span>
+        </div>
+        <div class="vol-stat">
+          <b class="mono">8</b>
+          <span>سنوات مع الكشافة السعودية لدعم خدمات الحج</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="education">
+    <div class="panel-id mono">04 — التعليم</div>
+    <h2>المؤهل الدراسي</h2>
+    <div class="edu-degree">
+      <h3>بكالوريوس هندسة الحاسب والشبكات</h3>
+      <div class="cert-meta">جامعة الجوف، سكاكا — 2025</div>
+    </div>
+  </section>
+
+  <section class="panel" id="certs">
+    <div class="panel-id mono">05 — الشهادات</div>
+    <h2>الشهادات المهنية</h2>
+
+    <div class="cert-item">
+      <div class="stamp"><img src="https://faisalceng.github.io/nfc-cv/ccna-intro.png" alt="شهادة CCNA" loading="lazy"></div>
+      <div class="cert-info">
+        <h3>CCNA: مقدمة في الشبكات</h3>
+        <div class="cert-meta">Cisco Networking Academy — ديسمبر 2023</div>
+        <a href="https://faisalceng.github.io/nfc-cv/CCNA-_Introduction_to_Networks_certificate_faisal-alsharari4-gmail-com_0786a78a-d680-420c-80cd-bf2195c5207d.pdf" target="_blank" rel="noopener">عرض الشهادة PDF</a>
+      </div>
+    </div>
+
+    <div class="cert-item">
+      <div class="stamp"><img src="https://faisalceng.github.io/nfc-cv/ethical-hacker.png" alt="شهادة الهاكر الأخلاقي" loading="lazy"></div>
+      <div class="cert-info">
+        <h3>الهاكر الأخلاقي (Ethical Hacker)</h3>
+        <div class="cert-meta">Cisco Networking Academy — مايو 2025</div>
+        <a href="https://faisalceng.github.io/nfc-cv/certificate_faisal-alsharari4-gmail-com_e63ef6a7-64c8-4f5a-9d5e-94891303e53d.pdf" target="_blank" rel="noopener">عرض الشهادة PDF</a>
+      </div>
+    </div>
+
+    <div class="cert-item">
+      <div class="stamp text-only">IoT</div>
+      <div class="cert-info">
+        <h3>مقدمة في إنترنت الأشياء</h3>
+        <div class="cert-meta">Cisco Networking Academy — يوليو 2026</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="contact">
+    <div class="panel-id mono">06 — تواصل</div>
+    <h2>معلومات التواصل</h2>
+
+    <div class="contact-grid">
+      <div class="contact-row"><span>+966 55 444 7552</span><span class="label">PHONE</span></div>
+      <div class="contact-row"><span>enc.faisal@gmail.com</span><span class="label">EMAIL</span></div>
+      <div class="contact-row"><span>الرياض، السعودية</span><span class="label">LOCATION</span></div>
+    </div>
+
+    <div class="cv-downloads">
+      <a class="btn" href="cv-arabic.pdf" download>تحميل السيرة (عربي)</a>
+      <a class="btn" href="cv-english.pdf" download>Download CV (English)</a>
+    </div>
+
+    <div class="socials">
+      <a href="https://wa.me/966554447552" target="_blank" rel="noopener" aria-label="واتساب">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5s-.7-1.7-1-2.3c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1.1 2.8 1.2 3c.1.2 2.2 3.4 5.3 4.7.7.3 1.3.5 1.8.7.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.1-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.3c1.4.8 3.1 1.2 4.8 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.1.8.8-3-.2-.3C4 14.9 3.6 13.5 3.6 12c0-4.6 3.8-8.4 8.4-8.4s8.4 3.8 8.4 8.4-3.8 8.2-8.4 8.2z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/faisal-alsharari-161556366/" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M4.98 3.5C4.98 4.9 3.9 6 2.5 6S0 4.9 0 3.5 1.1 1 2.5 1s2.48 1.1 2.48 2.5zM.24 8.25h4.5V23H.24V8.25zM8.5 8.25h4.3v2.02h.06c.6-1.13 2.06-2.32 4.24-2.32 4.53 0 5.37 2.98 5.37 6.86V23h-4.5v-6.36c0-1.52-.03-3.48-2.12-3.48-2.13 0-2.46 1.66-2.46 3.37V23h-4.5V8.25z"/></svg>
+      </a>
+      <a href="https://x.com/Faisal_CEng" target="_blank" rel="noopener" aria-label="X">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.9 1.9h3.7l-8 9.2 9.5 12.5h-7.4l-5.8-7.6-6.6 7.6H1L9.6 14 .5 1.9h7.6l5.2 7 5.6-7zm-1.3 19.5h2L6.5 4h-2.1l13.2 17.4z"/></svg>
+      </a>
+      <a href="https://github.com/Faisal-cne" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 .5C5.6.5.5 5.6.5 12c0 5.1 3.3 9.4 7.9 11 .6.1.8-.3.8-.6v-2.2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2.9-.3 2-.4 3-.4s2 .1 3 .4c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.7.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.6 7.9-5.9 7.9-11C23.5 5.6 18.4.5 12 .5z"/></svg>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>© 2026 FAISAL ALSHARARI — ALL RIGHTS RESERVED</footer>
+
+<script>
+  const panels = document.querySelectorAll('.panel');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  panels.forEach(p => io.observe(p));
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const card = document.getElementById('idcard');
+  if(card && !reduceMotion && window.matchMedia('(hover: hover)').matches){
+    card.style.transition = 'transform 0.15s ease-out';
+    card.addEventListener('mousemove', (e) => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `perspective(800px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(800px) rotateY(0deg) rotateX(0deg)';
+    });
+  }
+</script>
+
+</body>
+</html>
