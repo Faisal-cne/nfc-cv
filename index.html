@@ -254,6 +254,7 @@
       align-items: center;
       gap: 12px;
       border: 1px solid transparent;
+      cursor: pointer;
     }
     .btn-primary {
       background: linear-gradient(135deg, var(--neon-cyan), #007BFF);
@@ -770,7 +771,8 @@
         مشروع التخرج: روبوت RFID ذكي من المحاكاة الافتراضية إلى النموذج المادي.
       </p>
       <div class="hero-buttons">
-        <a href="#" class="btn btn-primary"><i class="fas fa-file-pdf"></i> تحميل السيرة الذاتية</a>
+        <!-- تم التعديل هنا: إضافة download والمسار الصحيح للملف -->
+        <a href="cv-english.pdf" download class="btn btn-primary"><i class="fas fa-file-pdf"></i> تحميل السيرة الذاتية</a>
         <a href="https://github.com/Faisal-cne" target="_blank" class="btn btn-outline"><i class="fab fa-github"></i> GitHub</a>
         <a href="https://linkedin.com/in/faisal-alsharari" target="_blank" class="btn btn-outline"><i class="fab fa-linkedin"></i> LinkedIn</a>
       </div>
@@ -786,10 +788,7 @@
           <span class="stat-label"><i class="fas fa-clock"></i> ساعات تطوعية</span>
           <span class="stat-value">600+</span>
         </div>
-        <div class="stat-item">
-          <span class="stat-label"><i class="fas fa-flag"></i> سنوات كشفية</span>
-          <span class="stat-value">8</span>
-        </div>
+        <!-- تم حذف عنصر "سنوات كشفية" هنا بناءً على طلبك -->
         <div class="stat-item">
           <span class="stat-label"><i class="fas fa-certificate"></i> شهادات Cisco</span>
           <span class="stat-value">3</span>
@@ -1157,13 +1156,7 @@
     }
     drawNetwork();
 
-    // ==========================================
-    // 3. CV DOWNLOAD PLACEHOLDER
-    // ==========================================
-    document.querySelector('.btn-primary')?.addEventListener('click', function(e) {
-      e.preventDefault();
-      alert('سيتم تحميل ملف السيرة الذاتية (cv-english.pdf) فور رفعه على المستودع.');
-    });
+    // تم حذف مستمع الحدث الخاص بالـ alert نهائياً لأن الزر الآن يستخدم خاصية download مباشرة.
   </script>
 
 </body>
