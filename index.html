@@ -275,6 +275,19 @@
       background: rgba(0, 240, 255, 0.05);
       transform: translateY(-3px);
     }
+    .btn-small {
+      padding: 8px 18px;
+      font-size: 14px;
+    }
+    .btn-github {
+      background: #24292e;
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .btn-github:hover {
+      background: #2f363d;
+      transform: translateY(-3px);
+    }
 
     /* Hero Right Card (Dashboard Stats) */
     .dashboard-card {
@@ -540,6 +553,54 @@
       color: var(--neon-pink);
       font-weight: 700;
     }
+    .cert-actions {
+      margin-top: 18px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .cert-actions .btn {
+      flex: 1;
+      justify-content: center;
+      min-width: 120px;
+    }
+
+    /* ==========================================
+       GAME PROJECTS (References)
+    ========================================== */
+    .game-card {
+      background: rgba(19, 22, 30, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 18px;
+      padding: 25px;
+      transition: 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+    .game-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+    .game-card .game-icon {
+      font-size: 48px;
+      color: var(--neon-orange);
+      margin-bottom: 15px;
+    }
+    .game-card h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    .game-card p {
+      color: var(--text-dim);
+      line-height: 1.8;
+      font-size: 15px;
+      margin-bottom: 18px;
+      flex: 1;
+    }
+    .game-card .btn {
+      align-self: flex-start;
+    }
 
     /* ==========================================
        EXPERIENCE (Timeline)
@@ -722,6 +783,9 @@
         padding: 20px;
         font-size: 16px;
       }
+      .cert-actions .btn {
+        flex: 1 1 100%;
+      }
     }
   </style>
 </head>
@@ -744,6 +808,7 @@
         <li><a href="#about">نبذة</a></li>
         <li><a href="#skills">المهارات</a></li>
         <li><a href="#projects">المشاريع</a></li>
+        <li><a href="#games">الألعاب</a></li>
         <li><a href="#certs">الشهادات</a></li>
         <li><a href="#experience">الخبرات</a></li>
         <li><a href="#contact">التواصل</a></li>
@@ -771,7 +836,6 @@
         مشروع التخرج: روبوت RFID ذكي من المحاكاة الافتراضية إلى النموذج المادي.
       </p>
       <div class="hero-buttons">
-        <!-- تم التعديل هنا: إضافة download والمسار الصحيح للملف -->
         <a href="cv-english.pdf" download class="btn btn-primary"><i class="fas fa-file-pdf"></i> تحميل السيرة الذاتية</a>
         <a href="https://github.com/Faisal-cne" target="_blank" class="btn btn-outline"><i class="fab fa-github"></i> GitHub</a>
         <a href="https://linkedin.com/in/faisal-alsharari" target="_blank" class="btn btn-outline"><i class="fab fa-linkedin"></i> LinkedIn</a>
@@ -788,7 +852,6 @@
           <span class="stat-label"><i class="fas fa-clock"></i> ساعات تطوعية</span>
           <span class="stat-value">600+</span>
         </div>
-        <!-- تم حذف عنصر "سنوات كشفية" هنا بناءً على طلبك -->
         <div class="stat-item">
           <span class="stat-label"><i class="fas fa-certificate"></i> شهادات Cisco</span>
           <span class="stat-value">3</span>
@@ -881,6 +944,9 @@
             <span>VR</span>
             <span>Arduino</span>
           </div>
+          <div style="margin-top:18px;">
+            <a href="https://github.com/Faisal-cne/RFID-Robot" target="_blank" class="btn btn-github btn-small"><i class="fab fa-github"></i> عرض المشروع على GitHub</a>
+          </div>
         </div>
       </div>
 
@@ -916,6 +982,40 @@
   </section>
 
   <!-- ==========================================
+  GAME PROJECTS (References)
+  ========================================== -->
+  <section id="games">
+    <div class="section-header">
+      <h2>مشاريع الألعاب</h2>
+      <div class="line-deco"></div>
+    </div>
+    <div class="grid-3">
+
+      <div class="game-card">
+        <div class="game-icon"><i class="fas fa-gamepad"></i></div>
+        <h3>Project: Cyber Escape</h3>
+        <p>لعبة مغامرات سايبربنكية تعتمد على حل الألغاز والهروب من الأنظمة الأمنية. تم تطويرها باستخدام Unity و C#.</p>
+        <a href="https://github.com/Faisal-cne/Cyber-Escape" target="_blank" class="btn btn-github btn-small"><i class="fab fa-github"></i> عرض المشروع</a>
+      </div>
+
+      <div class="game-card">
+        <div class="game-icon"><i class="fas fa-vr-cardboard"></i></div>
+        <h3>VR: MetaWorld</h3>
+        <p>تجربة واقع افتراضي غامرة تتيح للمستخدم استكشاف عوالم ثلاثية الأبعاد والتفاعل مع البيئة المحيطة.</p>
+        <a href="https://github.com/Faisal-cne/MetaWorld-VR" target="_blank" class="btn btn-github btn-small"><i class="fab fa-github"></i> عرض المشروع</a>
+      </div>
+
+      <div class="game-card">
+        <div class="game-icon"><i class="fas fa-chess-queen"></i></div>
+        <h3>Strategy: Kingdom Defense</h3>
+        <p>لعبة استراتيجية تعتمد على بناء الدفاعات وإدارة الموارد لحماية المملكة من الهجمات.</p>
+        <a href="https://github.com/Faisal-cne/Kingdom-Defense" target="_blank" class="btn btn-github btn-small"><i class="fab fa-github"></i> عرض المشروع</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
   CERTIFICATES
   ========================================== -->
   <section id="certs">
@@ -931,6 +1031,10 @@
           <h3>CCNA: Introduction to Networks</h3>
           <p>مقدمة في الشبكات من Cisco، تغطي أساسيات IPv4/IPv6، التوجيه، والتبديل.</p>
           <span class="cert-date"><i class="far fa-calendar-alt"></i> ديسمبر 2023</span>
+          <div class="cert-actions">
+            <a href="ccna-cert.pdf" download class="btn btn-primary btn-small"><i class="fas fa-download"></i> تحميل PDF</a>
+            <a href="ccna-cert.png" download class="btn btn-outline btn-small"><i class="fas fa-image"></i> تحميل PNG</a>
+          </div>
         </div>
       </div>
 
@@ -940,6 +1044,10 @@
           <h3>Ethical Hacker</h3>
           <p>أساسيات الأمن السيبراني والاختراق الأخلاقي، تحليل الثغرات وحماية الأنظمة.</p>
           <span class="cert-date"><i class="far fa-calendar-alt"></i> مايو 2025</span>
+          <div class="cert-actions">
+            <a href="ethical-hacker-cert.pdf" download class="btn btn-primary btn-small"><i class="fas fa-download"></i> تحميل PDF</a>
+            <a href="ethical-hacker-cert.png" download class="btn btn-outline btn-small"><i class="fas fa-image"></i> تحميل PNG</a>
+          </div>
         </div>
       </div>
 
@@ -949,6 +1057,10 @@
           <h3>Introduction to IoT</h3>
           <p>مقدمة في إنترنت الأشياء، الربط بين الأجهزة الذكية وتحليل البيانات.</p>
           <span class="cert-date"><i class="far fa-calendar-alt"></i> يوليو 2026</span>
+          <div class="cert-actions">
+            <a href="iot-cert.pdf" download class="btn btn-primary btn-small"><i class="fas fa-download"></i> تحميل PDF</a>
+            <a href="iot-cert.png" download class="btn btn-outline btn-small"><i class="fas fa-image"></i> تحميل PNG</a>
+          </div>
         </div>
       </div>
 
@@ -1155,8 +1267,6 @@
       requestAnimationFrame(drawNetwork);
     }
     drawNetwork();
-
-    // تم حذف مستمع الحدث الخاص بالـ alert نهائياً لأن الزر الآن يستخدم خاصية download مباشرة.
   </script>
 
 </body>
