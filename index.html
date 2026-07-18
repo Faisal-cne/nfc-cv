@@ -1,240 +1,888 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>فيصل الشراري | مهندس حاسب وشبكات</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* ==========================================
+       RESET
+    ========================================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      direction: rtl;
+      font-family: 'Tajawal', sans-serif;
+      background: #050816;
+      color: #fff;
+      overflow-x: hidden;
+    }
 
-<title>فيصل الشراري | مهندس حاسب وشبكات</title>
+    /* ==========================================
+       COLORS
+    ========================================== */
+    :root {
+      --primary: #2563EB;
+      --secondary: #06B6D4;
+      --bg: #050816;
+      --bg2: #0B1220;
+      --card: #111827;
+      --border: rgba(255,255,255,.08);
+      --text: #F8FAFC;
+      --text2: #94A3B8;
+    }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+    /* ==========================================
+       BACKGROUND
+    ========================================== */
+    .background {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(circle at top right, #1d4ed833, transparent 35%),
+        radial-gradient(circle at bottom left, #06b6d422, transparent 35%),
+        #050816;
+    }
+    .background::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    /* ==========================================
+       NAVBAR
+    ========================================== */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 999;
+      backdrop-filter: blur(18px);
+      background: rgba(5,8,22,.75);
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+    nav {
+      width: min(1300px, 92%);
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: 2px;
+    }
+    nav ul {
+      display: flex;
+      gap: 35px;
+      list-style: none;
+    }
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: .3s;
+      font-weight: 500;
+    }
+    nav a:hover {
+      color: white;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    /* ==========================================
+       HERO
+    ========================================== */
+    .hero {
+      width: min(1300px, 92%);
+      margin: auto;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 70px;
+      align-items: center;
+      padding-top: 90px;
+    }
+    .badge {
+      display: inline-block;
+      background: #1E3A8A;
+      color: white;
+      padding: 10px 22px;
+      border-radius: 999px;
+      margin-bottom: 30px;
+      font-size: 15px;
+    }
+    .hero h1 {
+      font-size: 74px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero h2 {
+      color: #CBD5E1;
+      font-size: 28px;
+      margin-bottom: 25px;
+      font-weight: 500;
+    }
+    .hero p {
+      color: #94A3B8;
+      font-size: 19px;
+      line-height: 2;
+      max-width: 700px;
+    }
+    .buttons {
+      margin-top: 45px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .buttons a {
+      padding: 18px 34px;
+      border-radius: 14px;
+      text-decoration: none;
+      transition: .35s;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .primary {
+      background: linear-gradient(135deg, #2563EB, #06B6D4);
+      color: white;
+    }
+    .buttons a:last-child {
+      border: 1px solid rgba(255,255,255,.08);
+      color: white;
+    }
+    .buttons a:hover {
+      transform: translateY(-5px);
+    }
 
-<link rel="stylesheet" href="style.css">
+    /* ==========================================
+       GLASS CARD (STATS)
+    ========================================== */
+    .glass-card {
+      background: rgba(17,24,39,.75);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 28px;
+      backdrop-filter: blur(18px);
+      padding: 40px;
+      box-shadow: 0 25px 70px rgba(0,0,0,.35);
+    }
+    .glass-card h3 {
+      font-size: 30px;
+      margin-bottom: 35px;
+    }
+    .stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+    .stat:last-child {
+      border: none;
+    }
+    .stat span {
+      font-size: 36px;
+      color: #3B82F6;
+      font-weight: 800;
+    }
+    .stat p {
+      color: #CBD5E1;
+      font-size: 17px;
+    }
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    /* ==========================================
+       SECTIONS
+    ========================================== */
+    section {
+      width: min(1300px, 92%);
+      margin: auto;
+      padding: 120px 0;
+    }
+    section h2 {
+      font-size: 48px;
+      margin-bottom: 25px;
+      position: relative;
+      display: inline-block;
+    }
+    section h2::after {
+      content: "";
+      position: absolute;
+      bottom: -12px;
+      right: 0;
+      width: 80px;
+      height: 4px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #2563EB, #06B6D4);
+    }
 
+    /* ==========================================
+       ABOUT
+    ========================================== */
+    #about p {
+      margin-top: 35px;
+      max-width: 900px;
+      line-height: 2.2;
+      font-size: 20px;
+      color: #B6C2D3;
+    }
+
+    /* ==========================================
+       CARDS (skills, projects, certificates)
+    ========================================== */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+      margin-top: 55px;
+    }
+
+    /* ==========================================
+       SKILL CARD
+    ========================================== */
+    .skill {
+      background: #111827;
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 24px;
+      padding: 35px;
+      transition: .35s;
+      position: relative;
+      overflow: hidden;
+    }
+    .skill::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, #2563EB, #06B6D4);
+    }
+    .skill:hover {
+      transform: translateY(-12px);
+      border-color: #2563EB;
+    }
+    .skill i {
+      font-size: 42px;
+      color: #3B82F6;
+      margin-bottom: 25px;
+    }
+    .skill h3 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    .skill ul {
+      list-style: none;
+    }
+    .skill li {
+      padding: 12px 0;
+      color: #CBD5E1;
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+    .skill li:last-child {
+      border: none;
+    }
+
+    /* ==========================================
+       PROJECT CARD
+    ========================================== */
+    .project {
+      background: #111827;
+      border-radius: 25px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.05);
+      transition: .35s;
+    }
+    .project:hover {
+      transform: translateY(-10px);
+    }
+    .project img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      background: #1E293B;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      color: #3B82F6;
+    }
+    .project-content {
+      padding: 28px;
+    }
+    .project-content h3 {
+      font-size: 30px;
+      margin-bottom: 15px;
+    }
+    .project-content p {
+      color: #A9B4C4;
+      line-height: 1.9;
+      margin-bottom: 20px;
+    }
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .project-tags span {
+      background: #1E293B;
+      color: #60A5FA;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+    }
+
+    /* ==========================================
+       CERTIFICATE CARD
+    ========================================== */
+    .certificate {
+      background: #111827;
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 26px;
+      overflow: hidden;
+      transition: .35s;
+    }
+    .certificate:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 50px rgba(0,0,0,.35);
+    }
+    .certificate .cert-icon {
+      width: 100%;
+      height: 160px;
+      background: #1E293B;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 80px;
+      color: #3B82F6;
+    }
+    .certificate-content {
+      padding: 28px;
+    }
+    .certificate-content h3 {
+      font-size: 25px;
+      margin-bottom: 14px;
+    }
+    .certificate-content p {
+      color: #94A3B8;
+      line-height: 1.8;
+      margin-bottom: 18px;
+    }
+    .certificate-content span {
+      display: inline-block;
+      background: #1E3A8A;
+      color: white;
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+    }
+
+    /* ==========================================
+       TIMELINE (Experience)
+    ========================================== */
+    .timeline {
+      position: relative;
+      margin-top: 70px;
+      padding-right: 35px;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      right: 8px;
+      top: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(#2563EB, #06B6D4);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 45px;
+      padding: 30px;
+      background: #111827;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.06);
+    }
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      right: -36px;
+      top: 35px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #3B82F6;
+      box-shadow: 0 0 0 5px rgba(59,130,246,.18);
+    }
+    .timeline-item h3 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    .timeline-item h4 {
+      color: #60A5FA;
+      margin-bottom: 15px;
+    }
+    .timeline-item p {
+      color: #AAB7C7;
+      line-height: 2;
+    }
+
+    /* ==========================================
+       CONTACT
+    ========================================== */
+    .contact {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      margin-top: 60px;
+    }
+    .contact-card {
+      background: #111827;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.06);
+      padding: 35px;
+      transition: .3s;
+    }
+    .contact-card:hover {
+      transform: translateY(-6px);
+      border-color: #2563EB;
+    }
+    .contact-card i {
+      font-size: 40px;
+      color: #3B82F6;
+      margin-bottom: 20px;
+    }
+    .contact-card h3 {
+      margin-bottom: 15px;
+      font-size: 26px;
+    }
+    .contact-card p {
+      color: #AAB7C7;
+      line-height: 1.8;
+    }
+    .contact-card a {
+      color: #60A5FA;
+      text-decoration: none;
+    }
+    .contact-card a:hover {
+      text-decoration: underline;
+    }
+
+    /* ==========================================
+       FOOTER
+    ========================================== */
+    footer {
+      margin-top: 120px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      padding: 40px 0;
+      text-align: center;
+      color: #94A3B8;
+    }
+
+    /* ==========================================
+       SCROLLBAR
+    ========================================== */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #050816;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2563EB;
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3B82F6;
+    }
+
+    /* ==========================================
+       RESPONSIVE
+    ========================================== */
+    @media(max-width:1100px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero p {
+        margin: auto;
+      }
+      .buttons {
+        justify-content: center;
+      }
+      .contact {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media(max-width:768px) {
+      nav {
+        height: auto;
+        padding: 20px 0;
+        flex-direction: column;
+        gap: 20px;
+      }
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+      }
+      .hero h1 {
+        font-size: 48px;
+      }
+      .hero h2 {
+        font-size: 22px;
+      }
+      section h2 {
+        font-size: 36px;
+      }
+      .cards {
+        grid-template-columns: 1fr;
+      }
+      .contact {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="background"></div>
-
-<header>
-
-<nav>
-
-<div class="logo">
-
-FIAISAL.
-
-</div>
-
-<ul>
-
-<li><a href="#home">الرئيسية</a></li>
-
-<li><a href="#about">نبذة</a></li>
-
-<li><a href="#skills">المهارات</a></li>
-
-<li><a href="#projects">المشاريع</a></li>
-
-<li><a href="#certificates">الشهادات</a></li>
-
-<li><a href="#experience">الخبرات</a></li>
-
-<li><a href="#contact">التواصل</a></li>
-
-</ul>
-
-</nav>
-
-</header>
-
-<section id="home" class="hero">
-
-<div class="hero-text">
-
-<div class="badge">
-
-مهندس حاسب وشبكات
-
-</div>
-
-<h1>
-
-فيصل مدالله الشراري
-
-</h1>
-
-<h2>
-
-مطور ألعاب • مطور Unity • مطور VRChat • إدارة سيرفرات
-
-</h2>
-
-<p>
-
-مهندس حاسب وشبكات متخصص في تطوير البرمجيات، البنية التحتية، الشبكات، إدارة السيرفرات، وتطوير الألعاب والواقع الافتراضي باستخدام Unity.
-
-</p>
-
-<div class="buttons">
-
-<a href="#" class="primary">
-
-تحميل السيرة الذاتية
-
-</a>
-
-<a href="https://github.com/Faisal-cne">
-
-GitHub
-
-</a>
-
-</div>
-
-</div>
-
-<div class="hero-image">
-
-<div class="glass-card">
-
-<h3>
-
-إحصائيات
-
-</h3>
-
-<div class="stat">
-
-<span>144K+</span>
-
-<p>عدد اللاعبين</p>
-
-</div>
-
-<div class="stat">
-
-<span>600+</span>
-
-<p>ساعة تطوع</p>
-
-</div>
-
-<div class="stat">
-
-<span>8</span>
-
-<p>سنوات بالكشافة</p>
-
-</div>
-
-<div class="stat">
-
-<span>3</span>
-
-<p>شهادات Cisco</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<section id="about">
-
-<h2>
-
-نبذة عني
-
-</h2>
-
-<p>
-
-هنا راح نحط النبذة الاحترافية المستخرجة من السيرة الذاتية.
-
-</p>
-
-</section>
-
-<section id="skills">
-
-<h2>
-
-المهارات التقنية
-
-</h2>
-
-<div class="cards">
-
-</div>
-
-</section>
-
-<section id="projects">
-
-<h2>
-
-أبرز المشاريع
-
-</h2>
-
-<div class="cards">
-
-</div>
-
-</section>
-
-<section id="certificates">
-
-<h2>
-
-الشهادات
-
-</h2>
-
-<div class="cards">
-
-</div>
-
-</section>
-
-<section id="experience">
-
-<h2>
-
-الخبرات
-
-</h2>
-
-<div class="timeline">
-
-</div>
-
-</section>
-
-<section id="contact">
-
-<h2>
-
-التواصل
-
-</h2>
-
-</section>
-
-<script src="script.js"></script>
+  <div class="background"></div>
+
+  <!-- ============================================
+  HEADER
+  ============================================ -->
+  <header>
+    <nav>
+      <div class="logo">FIAISAL.</div>
+      <ul>
+        <li><a href="#home">الرئيسية</a></li>
+        <li><a href="#about">نبذة</a></li>
+        <li><a href="#skills">المهارات</a></li>
+        <li><a href="#projects">المشاريع</a></li>
+        <li><a href="#certificates">الشهادات</a></li>
+        <li><a href="#experience">الخبرات</a></li>
+        <li><a href="#contact">التواصل</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ============================================
+  HERO
+  ============================================ -->
+  <section id="home" class="hero">
+    <div class="hero-text">
+      <div class="badge">مهندس حاسب وشبكات</div>
+      <h1>فيصل مدالله الشراري</h1>
+      <h2>مطور ألعاب • مطور Unity • مطور VRChat • إدارة سيرفرات</h2>
+      <p>
+        مهندس حاسب وشبكات متخصص في تطوير البرمجيات، البنية التحتية، الشبكات،
+        إدارة السيرفرات، وتطوير الألعاب والواقع الافتراضي باستخدام Unity.
+      </p>
+      <div class="buttons">
+        <a href="#" class="primary"><i class="fas fa-download"></i> تحميل السيرة الذاتية</a>
+        <a href="https://github.com/Faisal-cne" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+        <a href="https://linkedin.com/in/faisal-alsharari" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="glass-card">
+        <h3>إحصائيات</h3>
+        <div class="stat">
+          <span>144K+</span>
+          <p>عدد اللاعبين</p>
+        </div>
+        <div class="stat">
+          <span>600+</span>
+          <p>ساعة تطوع</p>
+        </div>
+        <div class="stat">
+          <span>8</span>
+          <p>سنوات بالكشافة</p>
+        </div>
+        <div class="stat">
+          <span>3</span>
+          <p>شهادات Cisco</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+  ABOUT
+  ============================================ -->
+  <section id="about">
+    <h2>نبذة عني</h2>
+    <p>
+      خريج هندسة الحاسب والشبكات بجامعة الجوف، أمتلك خبرة عملية في إدارة السيرفرات
+      (Linux و Windows Server)، والبنية التحتية للشبكات، وتطوير التطبيقات الكاملة.
+      قمت بتطوير ونشر عدة ألعاب وتجارب واقع افتراضي باستخدام Unity و Blender.
+      مشروع التخرج كان عبارة عن روبوت ذكي متتبع للإنسان باستخدام تقنية RFID،
+      انتقل من محاكاة واقع افتراضي متكاملة إلى نموذج مادي يعمل بالتكامل بين البرمجيات والأجهزة.
+      أسعى لتطبيق مهاراتي في هندسة الشبكات، إدارة الأنظمة، أو البنية التحتية لتقنية المعلومات.
+    </p>
+  </section>
+
+  <!-- ============================================
+  SKILLS
+  ============================================ -->
+  <section id="skills">
+    <h2>المهارات التقنية</h2>
+    <div class="cards">
+
+      <div class="skill">
+        <i class="fas fa-network-wired"></i>
+        <h3>الشبكات وإدارة السيرفرات</h3>
+        <ul>
+          <li>إدارة شبكات الحاسوب</li>
+          <li>Linux & Windows Server</li>
+          <li>أساسيات الأمن السيبراني</li>
+          <li>استكشاف الأعطال</li>
+        </ul>
+      </div>
+
+      <div class="skill">
+        <i class="fas fa-code"></i>
+        <h3>البرمجة وقواعد البيانات</h3>
+        <ul>
+          <li>C#, Python, JavaScript, C++</li>
+          <li>SQL – تصميم وإدارة قواعد البيانات</li>
+          <li>تطوير الويب (HTML, CSS, JS)</li>
+          <li>Unity & VR Development</li>
+        </ul>
+      </div>
+
+      <div class="skill">
+        <i class="fas fa-gamepad"></i>
+        <h3>تطوير الألعاب والواقع الافتراضي</h3>
+        <ul>
+          <li>Unity Engine</li>
+          <li>Blender (نمذجة ثلاثية الأبعاد)</li>
+          <li>تصميم تفاعلات لحظية (Real‑time)</li>
+          <li>نشر الألعاب وتجارب VR</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+  PROJECTS
+  ============================================ -->
+  <section id="projects">
+    <h2>أبرز المشاريع</h2>
+    <div class="cards">
+
+      <div class="project">
+        <div class="project-img" style="background:#1e293b;height:220px;display:flex;align-items:center;justify-content:center;font-size:60px;color:#3B82F6;">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div class="project-content">
+          <h3>روبوت RFID متتبع للإنسان</h3>
+          <p>
+            مشروع التخرج: روبوت ذكي يستخدم تقنية RFID لتتبع المستخدم ومساعدته في حمل الأغراض.
+            تم بناء محاكاة كاملة بالواقع الافتراضي في Unity قبل تنفيذ النموذج المادي.
+          </p>
+          <div class="project-tags">
+            <span>Unity</span>
+            <span>RFID</span>
+            <span>VR</span>
+            <span>Arduino</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-img" style="background:#1e293b;height:220px;display:flex;align-items:center;justify-content:center;font-size:60px;color:#3B82F6;">
+          <i class="fas fa-vr-cardboard"></i>
+        </div>
+        <div class="project-content">
+          <h3>ألعاب وتجارب VR مستقلة</h3>
+          <p>
+            تطوير ونشر ألعاب وتجارب واقع افتراضي باستخدام Unity و Blender،
+            تشمل دورات تطوير كاملة من التصميم إلى النشر على منصات متعددة.
+          </p>
+          <div class="project-tags">
+            <span>Unity</span>
+            <span>Blender</span>
+            <span>C#</span>
+            <span>VR</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-img" style="background:#1e293b;height:220px;display:flex;align-items:center;justify-content:center;font-size:60px;color:#3B82F6;">
+          <i class="fas fa-server"></i>
+        </div>
+        <div class="project-content">
+          <h3>إدارة البنية التحتية والسيرفرات</h3>
+          <p>
+            إدارة بيئات Linux و Windows Server، تكوين النطاقات، استضافة الويب،
+            وإدارة قواعد البيانات مع مراقبة الأداء وضمان استمرارية الخدمة.
+          </p>
+          <div class="project-tags">
+            <span>Linux</span>
+            <span>Windows Server</span>
+            <span>SQL</span>
+            <span>Hosting</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+  CERTIFICATES
+  ============================================ -->
+  <section id="certificates">
+    <h2>الشهادات</h2>
+    <div class="cards">
+
+      <div class="certificate">
+        <div class="cert-icon"><i class="fas fa-certificate"></i></div>
+        <div class="certificate-content">
+          <h3>CCNA: Introduction to Networks</h3>
+          <p>Cisco – مقدمة في الشبكات</p>
+          <span>ديسمبر 2023</span>
+        </div>
+      </div>
+
+      <div class="certificate">
+        <div class="cert-icon"><i class="fas fa-user-secret"></i></div>
+        <div class="certificate-content">
+          <h3>Ethical Hacker</h3>
+          <p>Cisco – أساسيات الأمن السيبراني والاختراق الأخلاقي</p>
+          <span>مايو 2025</span>
+        </div>
+      </div>
+
+      <div class="certificate">
+        <div class="cert-icon"><i class="fas fa-microchip"></i></div>
+        <div class="certificate-content">
+          <h3>Introduction to IoT</h3>
+          <p>Cisco – مقدمة في إنترنت الأشياء</p>
+          <span>يوليو 2026</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+  EXPERIENCE
+  ============================================ -->
+  <section id="experience">
+    <h2>الخبرات</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <h3>تطوير الألعاب والواقع الافتراضي</h3>
+        <h4>مشاريع مستقلة – مستمر</h4>
+        <p>
+          تطوير ونشر ألعاب وتجارب VR باستخدام Unity و Blender، تغطية دورة التطوير الكاملة
+          من التصميم إلى النشر، مع تطبيق مهارات C# والنمذجة ثلاثية الأبعاد والتفاعل اللحظي.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <h3>إدارة السيرفرات والبنية التحتية</h3>
+        <h4>خبرة ذاتية – 1-3 سنوات</h4>
+        <p>
+          إدارة بيئات Linux و Windows Server، تكوين النطاقات، استضافة المواقع، وإدارة قواعد البيانات.
+          خبرة في مراقبة الأداء، التعامل مع بيانات المستخدمين، وضمان استمرارية الخدمة.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <h3>العمل التطوعي</h3>
+        <h4>أكثر من 600 ساعة تطوعية</h4>
+        <p>
+          من خلال المنصة الوطنية للعمل التطوعي، مشاركة في العديد من المبادرات المجتمعية.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <h3>خدمة الحج – الكشافة السعودية</h3>
+        <h4>أكثر من 8 سنوات</h4>
+        <p>
+          عضو في جمعية الكشافة السعودية، مشاركة في تنظيم وتقديم خدمات الحج والعمرة.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+  CONTACT
+  ============================================ -->
+  <section id="contact">
+    <h2>التواصل</h2>
+    <div class="contact">
+
+      <div class="contact-card">
+        <i class="fas fa-phone-alt"></i>
+        <h3>الهاتف</h3>
+        <p><a href="tel:+966554447552">+966 55 444 7552</a></p>
+      </div>
+
+      <div class="contact-card">
+        <i class="fas fa-envelope"></i>
+        <h3>البريد الإلكتروني</h3>
+        <p><a href="mailto:enc.faisal@gmail.com">enc.faisal@gmail.com</a></p>
+      </div>
+
+      <div class="contact-card">
+        <i class="fab fa-linkedin"></i>
+        <h3>LinkedIn</h3>
+        <p><a href="https://linkedin.com/in/faisal-alsharari" target="_blank">linkedin.com/in/faisal-alsharari</a></p>
+      </div>
+
+      <div class="contact-card">
+        <i class="fab fa-github"></i>
+        <h3>GitHub</h3>
+        <p><a href="https://github.com/Faisal-cne" target="_blank">github.com/Faisal-cne</a></p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+  FOOTER
+  ============================================ -->
+  <footer>
+    <p>© 2026 فيصل مدالله الشراري – جميع الحقوق محفوظة</p>
+  </footer>
+
+  <!-- ============================================
+  JavaScript (اختياري – تحسينات بسيطة)
+  ============================================ -->
+  <script>
+    // عند الضغط على زر تحميل السيرة الذاتية
+    document.querySelector('.buttons .primary')?.addEventListener('click', function(e) {
+      e.preventDefault();
+      alert('سيتم تحميل السيرة الذاتية قريباً. يمكنك الآن تحميل الملف cv-english.pdf من المستودع.');
+      // يمكنك استبدال الرابط الفعلي لملف PDF
+      // window.location.href = 'cv-english.pdf';
+    });
+  </script>
 
 </body>
-
 </html>
