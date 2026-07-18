@@ -364,3 +364,427 @@ font-size:52px;
 }
 
 }
+/* =========================
+   SKILLS SECTION
+========================= */
+
+.skills-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
+    gap:25px;
+
+}
+
+.skill-card{
+
+    background:linear-gradient(180deg,var(--card),var(--card2));
+
+    border:1px solid var(--border);
+
+    border-radius:22px;
+
+    padding:30px;
+
+    transition:.35s;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.skill-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(135deg,rgba(59,130,246,.12),rgba(6,182,212,.08));
+
+    opacity:0;
+
+    transition:.35s;
+
+}
+
+.skill-card:hover::before{
+
+    opacity:1;
+
+}
+
+.skill-card:hover{
+
+    transform:translateY(-10px);
+
+    border-color:rgba(59,130,246,.35);
+
+}
+
+.skill-card h3{
+
+    font-size:22px;
+
+    margin-bottom:20px;
+
+    position:relative;
+
+    z-index:1;
+
+}
+
+.skill-card ul{
+
+    list-style:none;
+
+    position:relative;
+
+    z-index:1;
+
+}
+
+.skill-card li{
+
+    padding:10px 0;
+
+    color:var(--text2);
+
+    border-bottom:1px solid rgba(255,255,255,.05);
+
+}
+
+.skill-card li:last-child{
+
+    border-bottom:none;
+
+}
+
+/* =========================
+   PROJECTS SECTION
+========================= */
+
+.project-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    gap:28px;
+
+}
+
+.project{
+
+    background:linear-gradient(180deg,var(--card),var(--card2));
+
+    border:1px solid var(--border);
+
+    border-radius:26px;
+
+    padding:32px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:.4s;
+
+}
+
+.project::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:4px;
+
+    background:linear-gradient(90deg,var(--primary),var(--cyan));
+
+}
+
+.project:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 25px 70px rgba(0,0,0,.4);
+
+}
+
+.project h3{
+
+    font-size:26px;
+
+    margin-bottom:12px;
+
+}
+
+.project p{
+
+    color:var(--text2);
+
+    margin-bottom:22px;
+
+    line-height:1.7;
+
+}
+
+.project span{
+
+    display:inline-block;
+
+    padding:10px 18px;
+
+    border-radius:999px;
+
+    background:rgba(59,130,246,.12);
+
+    color:#BFDBFE;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+/* =========================
+   TIMELINE SECTION
+========================= */
+
+.timeline{
+
+    position:relative;
+
+    padding-left:30px;
+
+}
+
+.timeline::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:8px;
+
+    top:0;
+
+    width:2px;
+
+    height:100%;
+
+    background:linear-gradient(var(--primary),var(--cyan));
+
+}
+
+.timeline-item{
+
+    position:relative;
+
+    margin-bottom:45px;
+
+    padding:25px 28px;
+
+    background:linear-gradient(180deg,var(--card),var(--card2));
+
+    border:1px solid var(--border);
+
+    border-radius:22px;
+
+}
+
+.timeline-item::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-34px;
+
+    top:32px;
+
+    width:18px;
+
+    height:18px;
+
+    border-radius:50%;
+
+    background:var(--primary);
+
+    box-shadow:0 0 0 5px rgba(59,130,246,.2);
+
+}
+
+.timeline-item h3{
+
+    font-size:26px;
+
+    margin-bottom:8px;
+
+}
+
+.timeline-item p{
+
+    color:var(--text2);
+
+    line-height:1.7;
+
+}
+
+/* =========================
+   CONTACT SECTION
+========================= */
+
+.contact-box{
+
+    background:linear-gradient(180deg,var(--card),var(--card2));
+
+    border:1px solid var(--border);
+
+    border-radius:28px;
+
+    padding:40px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.contact-box p{
+
+    color:var(--text2);
+
+    margin-bottom:8px;
+
+    font-size:14px;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+
+}
+
+.contact-box h3{
+
+    font-size:28px;
+
+    margin-bottom:24px;
+
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+    text-align:center;
+
+    padding:40px 20px 60px;
+
+    color:var(--text2);
+
+    border-top:1px solid var(--border);
+
+    margin-top:60px;
+
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes float{
+
+    0%{ transform:translateY(0px); }
+
+    50%{ transform:translateY(-10px); }
+
+    100%{ transform:translateY(0px); }
+
+}
+
+.card:nth-child(1){ animation:float 5s ease-in-out infinite; }
+.card:nth-child(2){ animation:float 5s ease-in-out infinite .5s; }
+.card:nth-child(3){ animation:float 5s ease-in-out infinite 1s; }
+.card:nth-child(4){ animation:float 5s ease-in-out infinite 1.5s; }
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+    nav{
+        padding:18px 6%;
+    }
+
+    .hero{
+        padding:120px 6% 60px;
+        gap:40px;
+    }
+
+    .hero h1{
+        font-size:44px;
+    }
+
+    .hero h2{
+        font-size:22px;
+    }
+
+    .description{
+        font-size:16px;
+    }
+
+    .buttons{
+        flex-direction:column;
+    }
+
+    .btn{
+        width:100%;
+        text-align:center;
+    }
+
+    .section-title{
+        font-size:34px;
+    }
+
+    .contact-box h3{
+        font-size:22px;
+    }
+
+}
+
+@media(max-width:480px){
+
+    .hero h1{
+        font-size:38px;
+    }
+
+    .hero h2{
+        font-size:19px;
+    }
+
+    .card h3{
+        font-size:26px;
+    }
+
+    .project h3{
+        font-size:22px;
+    }
+
+    .timeline-item h3{
+        font-size:22px;
+    }
+
+}
